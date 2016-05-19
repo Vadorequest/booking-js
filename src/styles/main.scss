@@ -1,6 +1,6 @@
 /*!
- * Hour Widget
- * http://hourhq.com
+ * Booking.js
+ * http://timekit.io
  * (c) 2015 Timekit Inc.
  */
 
@@ -21,7 +21,7 @@ $fontFamily:        'Open Sans', Helvetica, Tahoma, Arial, sans-serif;
 
 // Classes
 
-.hourwidget {
+.bookingjs {
   position: relative;
   font-family: $fontFamily;
   font-size: 13px;
@@ -190,6 +190,7 @@ $fontFamily:        'Open Sans', Helvetica, Tahoma, Arial, sans-serif;
   }
 
   &-closeicon {
+    height: 15px;
     width: 15px;
   }
 
@@ -264,6 +265,7 @@ $fontFamily:        'Open Sans', Helvetica, Tahoma, Arial, sans-serif;
       line-height: normal;
       font-family: $fontFamily;
       color: $textColor;
+      overflow: auto;
 
       &:focus {
         outline: 0;
@@ -414,7 +416,7 @@ $fontFamily:        'Open Sans', Helvetica, Tahoma, Arial, sans-serif;
     }
   }
 
-  &-hourlogo {
+  &-timekitlogo {
     width: 15px;
     height: 15px;
     margin-right: 5px;
