@@ -23,6 +23,6 @@ module.exports = {
         ]
     },
     plugins: [
-        new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /en-gb/)
+        new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /fr-fr/)
     ]
 };

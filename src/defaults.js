@@ -16,7 +16,7 @@ var primary = {
   bookingGraph: 'instant',
   bookingFields: {
     name: {
-      placeholder: 'Full name',
+      placeholder: 'Nom',
       prefilled: false,
       locked: false
     },
@@ -27,28 +27,28 @@ var primary = {
     },
     comment: {
       enabled: true,
-      placeholder: 'Comment',
+      placeholder: 'Commentaires',
       prefilled: false,
       required: false,
       locked: false
     },
     phone: {
       enabled: false,
-      placeholder: 'Phone number',
+      placeholder: 'Téléphone',
       prefilled: false,
       required: false,
       locked: false
     },
     voip: {
       enabled: false,
-      placeholder: 'Skype username',
+      placeholder: 'Skype',
       prefilled: false,
       required: false,
       locked: false
     },
     location: {
       enabled: false,
-      placeholder: 'Location',
+      placeholder: 'Localisation',
       prefilled: false,
       required: false,
       locked: false
@@ -67,7 +67,7 @@ var primary = {
     header: {
       left: '',
       center: '',
-      right: 'today, prev, next'
+      right: 'aujourd\'hui, précédent, suivant'
     },
     views: {
       agenda: {
@@ -77,15 +77,16 @@ var primary = {
     allDaySlot: false,
     scrollTime: '08:00:00',
     timezone: 'local',
-    nowIndicator: true
+    nowIndicator: true,
+    lang: 'fr'
   },
   localization: {
     showTimezoneHelper: true,
-    timeDateFormat: '12h-mdy-sun',
+    timeDateFormat: '24h-dmy-mon',
     strings: {
-      submitText: 'Book it',
-      successMessageTitle: 'Thanks!',
-      timezoneHelperLoading: 'Loading..',
+      submitText: 'Réserver maintenant',
+      successMessageTitle: 'Merci !',
+      timezoneHelperLoading: 'Chargement ...',
       timezoneHelperDifferent: 'Your timezone is %s hours %s of %s (calendar shown in your local time)',
       timezoneHelperSame: 'You are in the same timezone as %s'
     }
@@ -108,7 +109,7 @@ var bookingInstant = {
   },
   localization: {
     strings: {
-      successMessageBody: 'An invitation has been sent to: <br /> %s <br /><br /> Please accept the invitation to confirm the booking.'
+      successMessageBody: 'Une invitation a été envoyée à&nbsp;: <br /> %s <br /><br /> Merci d\'accepter cette invitation pour confirmer la réservation.'
     }
   }
 
@@ -128,7 +129,7 @@ var bookingConfirmDecline = {
   },
   localization: {
     strings: {
-      successMessageBody: "We have received your request and we'll be in touch when we have reviewed it. <br /><br />Have a great day!"
+      successMessageBody: "Nous avons bien reçu votre demande et nous vous contacterons lorsque nous l'aurons examinée. <br /><br />Passez une bonne journée&nbsp;!"
     }
   }
 
