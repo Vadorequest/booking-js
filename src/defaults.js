@@ -11,7 +11,7 @@ var primary = {
   avatar: '',
   autoload: true,
   includeStyles: true,
-  showCredits: true,
+  showCredits: false,
   goToFirstEvent: true,
   bookingGraph: 'instant',
   bookingFields: {
@@ -67,7 +67,7 @@ var primary = {
     header: {
       left: '',
       center: '',
-      right: 'aujourd\'hui, précédent, suivant'
+      right: 'today, prev, next'
     },
     views: {
       agenda: {
@@ -84,7 +84,7 @@ var primary = {
     showTimezoneHelper: true,
     timeDateFormat: '24h-dmy-mon',
     strings: {
-      submitText: 'Réserver maintenant',
+      submitText: 'Réserver',
       successMessageTitle: 'Merci !',
       timezoneHelperLoading: 'Chargement ...',
       timezoneHelperDifferent: 'Your timezone is %s hours %s of %s (calendar shown in your local time)',
