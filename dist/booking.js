@@ -70,13 +70,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	var $               = __webpack_require__(1);
 	window.fullcalendar = __webpack_require__(2);
 	var moment          = window.moment = __webpack_require__(3);
-	var timekit         = __webpack_require__(7);
-	__webpack_require__(29);
-	var interpolate     = __webpack_require__(30);
+	var timekit         = __webpack_require__(6);
+	__webpack_require__(28);
+	var interpolate     = __webpack_require__(29);
 	
 	// Internal dependencies
-	var utils         = __webpack_require__(31);
-	var defaultConfig = __webpack_require__(33);
+	var utils         = __webpack_require__(30);
+	var defaultConfig = __webpack_require__(32);
 	
 	// Main library
 	function TimekitBooking() {
@@ -91,10 +91,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	  // Inject style dependencies
 	  var includeStyles = function() {
-	    __webpack_require__(34);
-	    __webpack_require__(38);
-	    __webpack_require__(40);
-	    __webpack_require__(42);
+	    __webpack_require__(33);
+	    __webpack_require__(37);
+	    __webpack_require__(39);
+	    __webpack_require__(41);
 	  };
 	
 	  // Make sure DOM element is ready and clean it
@@ -210,9 +210,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	  var renderTimezoneHelper = function() {
 	
 	    var localTzOffset = (moment().utcOffset()/60);
-	    var timezoneIcon = __webpack_require__(44);
+	    var timezoneIcon = __webpack_require__(43);
 	
-	    var template = __webpack_require__(45);
+	    var template = __webpack_require__(44);
 	
 	    var timezoneHelperTarget = $(template.render({
 	      timezoneIcon: timezoneIcon,
@@ -237,7 +237,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      var tzOffsetDiff = Math.abs(localTzOffset - hostTzOffset);
 	      var tzDirection = (tzOffsetDiff > 0 ? 'ahead' : 'behind');
 	
-	      var template = __webpack_require__(45);
+	      var template = __webpack_require__(44);
 	      var newTimezoneHelperTarget = $(template.render({
 	        timezoneIcon: timezoneIcon,
 	        timezoneDifference: (tzOffsetDiff === 0 ? false : true),
@@ -323,7 +323,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  // Render the avatar image
 	  var renderAvatarImage = function() {
 	
-	    var template = __webpack_require__(49);
+	    var template = __webpack_require__(48);
 	    var avatarTarget = $(template.render({
 	      image: config.avatar
 	    }));
@@ -336,7 +336,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  // Render the avatar image
 	  var renderDisplayName = function() {
 	
-	    var template = __webpack_require__(50);
+	    var template = __webpack_require__(49);
 	    var displayNameTarget = $(template.render({
 	      name: config.name
 	    }));
@@ -351,8 +351,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	    utils.doCallback('showBookingPage', config, eventData);
 	
-	    var fieldsTemplate = __webpack_require__(51);
-	    var template = __webpack_require__(52);
+	    var fieldsTemplate = __webpack_require__(50);
+	    var template = __webpack_require__(51);
 	
 	    var dateFormat = config.localization.bookingDateFormat || moment.localeData().longDateFormat('LL');
 	    var timeFormat = config.localization.bookingTimeFormat || moment.localeData().longDateFormat('LT');
@@ -362,10 +362,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	      chosenTime:           moment(eventData.start).format(timeFormat) + ' - ' + moment(eventData.end).format(timeFormat),
 	      start:                moment(eventData.start).format(),
 	      end:                  moment(eventData.end).format(),
-	      closeIcon:            __webpack_require__(53),
-	      checkmarkIcon:        __webpack_require__(54),
-	      loadingIcon:          __webpack_require__(55),
-	      errorIcon:            __webpack_require__(56),
+	      closeIcon:            __webpack_require__(52),
+	      checkmarkIcon:        __webpack_require__(53),
+	      loadingIcon:          __webpack_require__(54),
+	      errorIcon:            __webpack_require__(55),
 	      submitText:           config.localization.strings.submitText,
 	      successMessageTitle:  config.localization.strings.successMessageTitle,
 	      successMessageBody:   interpolate.sprintf(config.localization.strings.successMessageBody, '<span class="booked-email"></span>'),
@@ -528,8 +528,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	    if (config.widgetSlug) { campaignName = 'hosted-widget'; }
 	    if (config.widgetId) { campaignName = 'embedded-widget'; }
 	
-	    var template = __webpack_require__(57);
-	    var timekitLogo = __webpack_require__(58);
+	    var template = __webpack_require__(56);
+	    var timekitLogo = __webpack_require__(57);
 	    var poweredTarget = $(template.render({
 	      timekitLogo: timekitLogo,
 	      campaignName: campaignName,
@@ -735,7 +735,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
-	 * FullCalendar v2.7.1
+	 * FullCalendar v2.7.2
 	 * Docs & License: http://fullcalendar.io/
 	 * (c) 2016 Adam Shaw
 	 */
@@ -755,13 +755,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	;;
 	
 	var FC = $.fullCalendar = {
-		version: "2.7.1",
+		version: "2.7.2",
 		internalApiVersion: 3
 	};
 	var fcViews = FC.views = {};
-	
-	
-	FC.isTouch = 'ontouchstart' in document;
 	
 	
 	$.fn.fullCalendar = function(options) {
@@ -1204,6 +1201,30 @@ return /******/ (function(modules) { // webpackBootstrap
 	// Stops a mouse/touch event from doing it's native browser action
 	function preventDefault(ev) {
 		ev.preventDefault();
+	}
+	
+	
+	// attach a handler to get called when ANY scroll action happens on the page.
+	// this was impossible to do with normal on/off because 'scroll' doesn't bubble.
+	// http://stackoverflow.com/a/32954565/96342
+	// returns `true` on success.
+	function bindAnyScroll(handler) {
+		if (window.addEventListener) {
+			window.addEventListener('scroll', handler, true); // useCapture=true
+			return true;
+		}
+		return false;
+	}
+	
+	
+	// undoes bindAnyScroll. must pass in the original function.
+	// returns `true` on success.
+	function unbindAnyScroll(handler) {
+		if (window.removeEventListener) {
+			window.removeEventListener('scroll', handler, true); // useCapture=true
+			return true;
+		}
+		return false;
 	}
 	
 	
@@ -2702,6 +2723,35 @@ return /******/ (function(modules) { // webpackBootstrap
 	})();
 	;;
 	
+	// simple class for toggle a `isIgnoringMouse` flag on delay
+	// initMouseIgnoring must first be called, with a millisecond delay setting.
+	var MouseIgnorerMixin = {
+	
+		isIgnoringMouse: false, // bool
+		delayUnignoreMouse: null, // method
+	
+	
+		initMouseIgnoring: function(delay) {
+			this.delayUnignoreMouse = debounce(proxy(this, 'unignoreMouse'), delay || 1000);
+		},
+	
+	
+		// temporarily ignore mouse actions on segments
+		tempIgnoreMouse: function() {
+			this.isIgnoringMouse = true;
+			this.delayUnignoreMouse();
+		},
+	
+	
+		// delayUnignoreMouse eventually calls this
+		unignoreMouse: function() {
+			this.isIgnoringMouse = false;
+		}
+	
+	};
+	
+	;;
+	
 	/* A rectangular panel that is absolutely positioned over other content
 	------------------------------------------------------------------------------------------------------------------------
 	Options:
@@ -3110,7 +3160,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	----------------------------------------------------------------------------------------------------------------------*/
 	// TODO: use Emitter
 	
-	var DragListener = FC.DragListener = Class.extend(ListenerMixin, {
+	var DragListener = FC.DragListener = Class.extend(ListenerMixin, MouseIgnorerMixin, {
 	
 		options: null,
 	
@@ -3122,6 +3172,8 @@ return /******/ (function(modules) { // webpackBootstrap
 		originX: null,
 		originY: null,
 	
+		// the wrapping element that scrolls, or MIGHT scroll if there's overflow.
+		// TODO: do this for wrappers that have overflow:hidden as well.
 		scrollEl: null,
 	
 		isInteracting: false,
@@ -3134,9 +3186,13 @@ return /******/ (function(modules) { // webpackBootstrap
 		delayTimeoutId: null,
 		minDistance: null,
 	
+		handleTouchScrollProxy: null, // calls handleTouchScroll, always bound to `this`
+	
 	
 		constructor: function(options) {
 			this.options = options || {};
+			this.handleTouchScrollProxy = proxy(this, 'handleTouchScroll');
+			this.initMouseIgnoring(500);
 		},
 	
 	
@@ -3148,7 +3204,10 @@ return /******/ (function(modules) { // webpackBootstrap
 			var isTouch = getEvIsTouch(ev);
 	
 			if (ev.type === 'mousedown') {
-				if (!isPrimaryMouseButton(ev)) {
+				if (this.isIgnoringMouse) {
+					return;
+				}
+				else if (!isPrimaryMouseButton(ev)) {
 					return;
 				}
 				else {
@@ -3190,7 +3249,7 @@ return /******/ (function(modules) { // webpackBootstrap
 		},
 	
 	
-		endInteraction: function(ev) {
+		endInteraction: function(ev, isCancelled) {
 			if (this.isInteracting) {
 				this.endDrag(ev);
 	
@@ -3203,13 +3262,20 @@ return /******/ (function(modules) { // webpackBootstrap
 				this.unbindHandlers();
 	
 				this.isInteracting = false;
-				this.handleInteractionEnd(ev);
+				this.handleInteractionEnd(ev, isCancelled);
+	
+				// a touchstart+touchend on the same element will result in the following addition simulated events:
+				// mouseover + mouseout + click
+				// let's ignore these bogus events
+				if (this.isTouch) {
+					this.tempIgnoreMouse();
+				}
 			}
 		},
 	
 	
-		handleInteractionEnd: function(ev) {
-			this.trigger('interactionEnd', ev);
+		handleInteractionEnd: function(ev, isCancelled) {
+			this.trigger('interactionEnd', ev, isCancelled || false);
 		},
 	
 	
@@ -3236,12 +3302,16 @@ return /******/ (function(modules) { // webpackBootstrap
 							touchStartIgnores--; // and we don't want this to fire immediately, so ignore.
 						}
 						else {
-							_this.endInteraction(ev);
+							_this.endInteraction(ev, true); // isCancelled=true
 						}
 					}
 				});
 	
-				if (this.scrollEl) {
+				// listen to ALL scroll actions on the page
+				if (
+					!bindAnyScroll(this.handleTouchScrollProxy) && // hopefully this works and short-circuits the rest
+					this.scrollEl // otherwise, attach a single handler to this
+				) {
 					this.listenTo(this.scrollEl, 'scroll', this.handleTouchScroll);
 				}
 			}
@@ -3262,8 +3332,10 @@ return /******/ (function(modules) { // webpackBootstrap
 		unbindHandlers: function() {
 			this.stopListeningTo($(document));
 	
+			// unbind scroll listening
+			unbindAnyScroll(this.handleTouchScrollProxy);
 			if (this.scrollEl) {
-				this.stopListeningTo(this.scrollEl);
+				this.stopListeningTo(this.scrollEl, 'scroll');
 			}
 		},
 	
@@ -3396,7 +3468,7 @@ return /******/ (function(modules) { // webpackBootstrap
 			// if the drag is being initiated by touch, but a scroll happens before
 			// the drag-initiating delay is over, cancel the drag
 			if (!this.isDragging) {
-				this.endInteraction(ev);
+				this.endInteraction(ev, true); // isCancelled=true
 			}
 		},
 	
@@ -4048,7 +4120,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	/* An abstract class comprised of a "grid" of areas that each represent a specific datetime
 	----------------------------------------------------------------------------------------------------------------------*/
 	
-	var Grid = FC.Grid = Class.extend(ListenerMixin, {
+	var Grid = FC.Grid = Class.extend(ListenerMixin, MouseIgnorerMixin, {
 	
 		view: null, // a View object
 		isRTL: null, // shortcut to the view's isRTL option
@@ -4081,6 +4153,9 @@ return /******/ (function(modules) { // webpackBootstrap
 			this.view = view;
 			this.isRTL = view.opt('isRTL');
 			this.elsByFill = {};
+	
+			this.dayDragListener = this.buildDayDragListener();
+			this.initMouseIgnoring();
 		},
 	
 	
@@ -4216,12 +4291,8 @@ return /******/ (function(modules) { // webpackBootstrap
 			this.el = el;
 			preventSelection(el);
 	
-			if (this.view.calendar.isTouch) {
-				this.bindDayHandler('touchstart', this.dayTouchStart);
-			}
-			else {
-				this.bindDayHandler('mousedown', this.dayMousedown);
-			}
+			this.bindDayHandler('touchstart', this.dayTouchStart);
+			this.bindDayHandler('mousedown', this.dayMousedown);
 	
 			// attach event-element-related handlers. in Grid.events
 			// same garbage collection note as above.
@@ -4299,16 +4370,24 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 		// Process a mousedown on an element that represents a day. For day clicking and selecting.
 		dayMousedown: function(ev) {
-			this.clearDragListeners();
-			this.buildDayDragListener().startInteraction(ev, {
-				//distance: 5, // needs more work if we want dayClick to fire correctly
-			});
+			if (!this.isIgnoringMouse) {
+				this.dayDragListener.startInteraction(ev, {
+					//distance: 5, // needs more work if we want dayClick to fire correctly
+				});
+			}
 		},
 	
 	
 		dayTouchStart: function(ev) {
-			this.clearDragListeners();
-			this.buildDayDragListener().startInteraction(ev, {
+			var view = this.view;
+	
+			// HACK to prevent a user's clickaway for unselecting a range or an event
+			// from causing a dayClick.
+			if (view.isSelected || view.selectedEvent) {
+				this.tempIgnoreMouse();
+			}
+	
+			this.dayDragListener.startInteraction(ev, {
 				delay: this.view.opt('longPressDelay')
 			});
 		},
@@ -4326,10 +4405,10 @@ return /******/ (function(modules) { // webpackBootstrap
 			// this listener tracks a mousedown on a day element, and a subsequent drag.
 			// if the drag ends on the same day, it is a 'dayClick'.
 			// if 'selectable' is enabled, this listener also detects selections.
-			var dragListener = this.dayDragListener = new HitDragListener(this, {
+			var dragListener = new HitDragListener(this, {
 				scroll: view.opt('dragScroll'),
 				interactionStart: function() {
-					dayClickHit = dragListener.origHit;
+					dayClickHit = dragListener.origHit; // for dayClick, where no dragging happens
 				},
 				dragStart: function() {
 					view.unselect(); // since we could be rendering a new selection, we want to clear any old one
@@ -4362,20 +4441,24 @@ return /******/ (function(modules) { // webpackBootstrap
 					_this.unrenderSelection();
 					enableCursor();
 				},
-				interactionEnd: function(ev) {
-					if (dayClickHit) {
-						view.triggerDayClick(
-							_this.getHitSpan(dayClickHit),
-							_this.getHitEl(dayClickHit),
-							ev
-						);
+				interactionEnd: function(ev, isCancelled) {
+					if (!isCancelled) {
+						if (
+							dayClickHit &&
+							!_this.isIgnoringMouse // see hack in dayTouchStart
+						) {
+							view.triggerDayClick(
+								_this.getHitSpan(dayClickHit),
+								_this.getHitEl(dayClickHit),
+								ev
+							);
+						}
+						if (selectionSpan) {
+							// the selection will already have been rendered. just report it
+							view.reportSelection(selectionSpan, ev);
+						}
+						enableCursor();
 					}
-					if (selectionSpan) {
-						// the selection will already have been rendered. just report it
-						view.reportSelection(selectionSpan, ev);
-					}
-					enableCursor();
-					_this.dayDragListener = null;
 				}
 			});
 	
@@ -4387,9 +4470,8 @@ return /******/ (function(modules) { // webpackBootstrap
 		// Useful for when public API methods that result in re-rendering are invoked during a drag.
 		// Also useful for when touch devices misbehave and don't fire their touchend.
 		clearDragListeners: function() {
-			if (this.dayDragListener) {
-				this.dayDragListener.endInteraction(); // will clear this.dayDragListener
-			}
+			this.dayDragListener.endInteraction();
+	
 			if (this.segDragListener) {
 				this.segDragListener.endInteraction(); // will clear this.segDragListener
 			}
@@ -4849,15 +4931,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 		// Attaches event-element-related handlers to the container element and leverage bubbling
 		bindSegHandlers: function() {
-			if (this.view.calendar.isTouch) {
-				this.bindSegHandler('touchstart', this.handleSegTouchStart);
-			}
-			else {
-				this.bindSegHandler('mouseenter', this.handleSegMouseover);
-				this.bindSegHandler('mouseleave', this.handleSegMouseout);
-				this.bindSegHandler('mousedown', this.handleSegMousedown);
-			}
-	
+			this.bindSegHandler('touchstart', this.handleSegTouchStart);
+			this.bindSegHandler('touchend', this.handleSegTouchEnd);
+			this.bindSegHandler('mouseenter', this.handleSegMouseover);
+			this.bindSegHandler('mouseleave', this.handleSegMouseout);
+			this.bindSegHandler('mousedown', this.handleSegMousedown);
 			this.bindSegHandler('click', this.handleSegClick);
 		},
 	
@@ -4885,8 +4963,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 		// Updates internal state and triggers handlers for when an event element is moused over
 		handleSegMouseover: function(seg, ev) {
-			if (!this.mousedOverSeg) {
+			if (
+				!this.isIgnoringMouse &&
+				!this.mousedOverSeg
+			) {
 				this.mousedOverSeg = seg;
+				seg.el.addClass('fc-allow-mouse-resize');
 				this.view.trigger('eventMouseover', seg.el[0], seg.event, ev);
 			}
 		},
@@ -4900,7 +4982,20 @@ return /******/ (function(modules) { // webpackBootstrap
 			if (this.mousedOverSeg) {
 				seg = seg || this.mousedOverSeg; // if given no args, use the currently moused-over segment
 				this.mousedOverSeg = null;
+				seg.el.removeClass('fc-allow-mouse-resize');
 				this.view.trigger('eventMouseout', seg.el[0], seg.event, ev);
+			}
+		},
+	
+	
+		handleSegMousedown: function(seg, ev) {
+			var isResizing = this.startSegResize(seg, ev, { distance: 5 });
+	
+			if (!isResizing && this.view.isEventDraggable(seg.event)) {
+				this.buildSegDragListener(seg)
+					.startInteraction(ev, {
+						distance: 5
+					});
 			}
 		},
 	
@@ -4920,37 +5015,25 @@ return /******/ (function(modules) { // webpackBootstrap
 			}
 	
 			if (!isResizing && (isDraggable || isResizable)) { // allowed to be selected?
-				this.clearDragListeners();
 	
 				dragListener = isDraggable ?
 					this.buildSegDragListener(seg) :
-					new DragListener(); // seg isn't draggable, but let's use a generic DragListener
-					                    // simply for the delay, so it can be selected.
+					this.buildSegSelectListener(seg); // seg isn't draggable, but still needs to be selected
 	
-				dragListener._dragStart = function() { // TODO: better way of binding
-					// if not previously selected, will fire after a delay. then, select the event
-					if (!isSelected) {
-						view.selectEvent(event);
-					}
-				};
-	
-				dragListener.startInteraction(ev, {
+				dragListener.startInteraction(ev, { // won't start if already started
 					delay: isSelected ? 0 : this.view.opt('longPressDelay') // do delay if not already selected
 				});
 			}
+	
+			// a long tap simulates a mouseover. ignore this bogus mouseover.
+			this.tempIgnoreMouse();
 		},
 	
 	
-		handleSegMousedown: function(seg, ev) {
-			var isResizing = this.startSegResize(seg, ev, { distance: 5 });
-	
-			if (!isResizing && this.view.isEventDraggable(seg.event)) {
-				this.clearDragListeners();
-				this.buildSegDragListener(seg)
-					.startInteraction(ev, {
-						distance: 5
-					});
-			}
+		handleSegTouchEnd: function(seg, ev) {
+			// touchstart+touchend = click, which simulates a mouseover.
+			// ignore this bogus mouseover.
+			this.tempIgnoreMouse();
 		},
 	
 	
@@ -4959,7 +5042,6 @@ return /******/ (function(modules) { // webpackBootstrap
 		// `dragOptions` are optional.
 		startSegResize: function(seg, ev, dragOptions) {
 			if ($(ev.target).is('.fc-resizer')) {
-				this.clearDragListeners();
 				this.buildSegResizeListener(seg, $(ev.target).is('.fc-start-resizer'))
 					.startInteraction(ev, dragOptions);
 				return true;
@@ -4975,6 +5057,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 		// Builds a listener that will track user-dragging on an event segment.
 		// Generic enough to work with any type of Grid.
+		// Has side effect of setting/unsetting `segDragListener`
 		buildSegDragListener: function(seg) {
 			var _this = this;
 			var view = this.view;
@@ -4984,6 +5067,10 @@ return /******/ (function(modules) { // webpackBootstrap
 			var isDragging;
 			var mouseFollower; // A clone of the original element that will move with the mouse
 			var dropLocation; // zoned event date properties
+	
+			if (this.segDragListener) {
+				return this.segDragListener;
+			}
 	
 			// Tracks mouse movement over the *view's* coordinate map. Allows dragging and dropping between subcomponents
 			// of the view.
@@ -5004,6 +5091,10 @@ return /******/ (function(modules) { // webpackBootstrap
 					mouseFollower.start(ev);
 				},
 				dragStart: function(ev) {
+					if (dragListener.isTouch && !view.isEventSelected(event)) {
+						// if not previously selected, will fire after a delay. then, select the event
+						view.selectEvent(event);
+					}
 					isDragging = true;
 					_this.handleSegMouseout(seg, ev); // ensure a mouseout on the manipulated event has been reported
 					_this.segDragStart(seg, ev);
@@ -5067,6 +5158,34 @@ return /******/ (function(modules) { // webpackBootstrap
 							view.reportEventDrop(event, dropLocation, this.largeUnit, el, ev);
 						}
 					});
+					_this.segDragListener = null;
+				}
+			});
+	
+			return dragListener;
+		},
+	
+	
+		// seg isn't draggable, but let's use a generic DragListener
+		// simply for the delay, so it can be selected.
+		// Has side effect of setting/unsetting `segDragListener`
+		buildSegSelectListener: function(seg) {
+			var _this = this;
+			var view = this.view;
+			var event = seg.event;
+	
+			if (this.segDragListener) {
+				return this.segDragListener;
+			}
+	
+			var dragListener = this.segDragListener = new DragListener({
+				dragStart: function(ev) {
+					if (dragListener.isTouch && !view.isEventSelected(event)) {
+						// if not previously selected, will fire after a delay. then, select the event
+						view.selectEvent(event);
+					}
+				},
+				interactionEnd: function(ev) {
 					_this.segDragListener = null;
 				}
 			});
@@ -8836,8 +8955,7 @@ return /******/ (function(modules) { // webpackBootstrap
 		// Binds DOM handlers to elements that reside outside the view container, such as the document
 		bindGlobalHandlers: function() {
 			this.listenTo($(document), 'mousedown', this.handleDocumentMousedown);
-			this.listenTo($(document), 'touchstart', this.handleDocumentTouchStart);
-			this.listenTo($(document), 'touchend', this.handleDocumentTouchEnd);
+			this.listenTo($(document), 'touchstart', this.processUnselect);
 		},
 	
 	
@@ -9398,25 +9516,18 @@ return /******/ (function(modules) { // webpackBootstrap
 		/* Mouse / Touch Unselecting (time range & event unselection)
 		------------------------------------------------------------------------------------------------------------------*/
 		// TODO: move consistently to down/start or up/end?
+		// TODO: don't kill previous selection if touch scrolling
 	
 	
 		handleDocumentMousedown: function(ev) {
-			// touch devices fire simulated mouse events on a "click".
-			// only process mousedown if we know this isn't a touch device.
-			if (!this.calendar.isTouch && isPrimaryMouseButton(ev)) {
-				this.processRangeUnselect(ev);
-				this.processEventUnselect(ev);
+			if (isPrimaryMouseButton(ev)) {
+				this.processUnselect(ev);
 			}
 		},
 	
 	
-		handleDocumentTouchStart: function(ev) {
+		processUnselect: function(ev) {
 			this.processRangeUnselect(ev);
-		},
-	
-	
-		handleDocumentTouchEnd: function(ev) {
-			// TODO: don't do this if because of touch-scrolling
 			this.processEventUnselect(ev);
 		},
 	
@@ -9689,7 +9800,6 @@ return /******/ (function(modules) { // webpackBootstrap
 		view: null, // current View object
 		header: null,
 		loadingLevel: 0, // number of simultaneous loading tasks
-		isTouch: false,
 	
 	
 		// a lot of this class' OOP logic is scoped within this constructor function,
@@ -9735,10 +9845,6 @@ return /******/ (function(modules) { // webpackBootstrap
 				overrides
 			]);
 			populateInstanceComputableOptions(this.options);
-	
-			this.isTouch = this.options.isTouch != null ?
-				this.options.isTouch :
-				FC.isTouch;
 	
 			this.viewSpecCache = {}; // somewhat unrelated
 		},
@@ -10196,10 +10302,6 @@ return /******/ (function(modules) { // webpackBootstrap
 			tm = options.theme ? 'ui' : 'fc';
 			element.addClass('fc');
 	
-			element.addClass(
-				t.isTouch ? 'fc-touch' : 'fc-cursor'
-			);
-	
 			if (options.isRTL) {
 				element.addClass('fc-rtl');
 			}
@@ -10242,7 +10344,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 			header.removeElement();
 			content.remove();
-			element.removeClass('fc fc-touch fc-cursor fc-ltr fc-rtl fc-unthemed ui-widget');
+			element.removeClass('fc fc-ltr fc-rtl fc-unthemed ui-widget');
 	
 			if (windowResizeProxy) {
 				$(window).unbind('resize', windowResizeProxy);
@@ -13705,7 +13807,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                module && module.exports) {
 	            try {
 	                oldLocale = globalLocale._abbr;
-	                __webpack_require__(5)("./" + name);
+	                !(function webpackMissingModule() { var e = new Error("Cannot find module \"./locale\""); e.code = 'MODULE_NOT_FOUND'; throw e; }());
 	                // because defineLocale currently also sets the global locale, we
 	                // want to undo that for lazy loaded locales
 	                locale_locales__getSetGlobalLocale(oldLocale);
@@ -17367,99 +17469,19 @@ return /******/ (function(modules) { // webpackBootstrap
 
 /***/ },
 /* 5 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ function(module, exports) {
 
-	var map = {
-		"./en-gb": 6,
-		"./en-gb.js": 6
-	};
 	function webpackContext(req) {
-		return __webpack_require__(webpackContextResolve(req));
-	};
-	function webpackContextResolve(req) {
-		return map[req] || (function() { throw new Error("Cannot find module '" + req + "'.") }());
-	};
-	webpackContext.keys = function webpackContextKeys() {
-		return Object.keys(map);
-	};
-	webpackContext.resolve = webpackContextResolve;
+		throw new Error("Cannot find module '" + req + "'.");
+	}
+	webpackContext.keys = function() { return []; };
+	webpackContext.resolve = webpackContext;
 	module.exports = webpackContext;
 	webpackContext.id = 5;
 
 
 /***/ },
 /* 6 */
-/***/ function(module, exports, __webpack_require__) {
-
-	//! moment.js locale configuration
-	//! locale : great britain english (en-gb)
-	//! author : Chris Gedrim : https://github.com/chrisgedrim
-	
-	;(function (global, factory) {
-	    true ? factory(__webpack_require__(3)) :
-	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
-	   factory(global.moment)
-	}(this, function (moment) { 'use strict';
-	
-	
-	    var en_gb = moment.defineLocale('en-gb', {
-	        months : 'January_February_March_April_May_June_July_August_September_October_November_December'.split('_'),
-	        monthsShort : 'Jan_Feb_Mar_Apr_May_Jun_Jul_Aug_Sep_Oct_Nov_Dec'.split('_'),
-	        weekdays : 'Sunday_Monday_Tuesday_Wednesday_Thursday_Friday_Saturday'.split('_'),
-	        weekdaysShort : 'Sun_Mon_Tue_Wed_Thu_Fri_Sat'.split('_'),
-	        weekdaysMin : 'Su_Mo_Tu_We_Th_Fr_Sa'.split('_'),
-	        longDateFormat : {
-	            LT : 'HH:mm',
-	            LTS : 'HH:mm:ss',
-	            L : 'DD/MM/YYYY',
-	            LL : 'D MMMM YYYY',
-	            LLL : 'D MMMM YYYY HH:mm',
-	            LLLL : 'dddd, D MMMM YYYY HH:mm'
-	        },
-	        calendar : {
-	            sameDay : '[Today at] LT',
-	            nextDay : '[Tomorrow at] LT',
-	            nextWeek : 'dddd [at] LT',
-	            lastDay : '[Yesterday at] LT',
-	            lastWeek : '[Last] dddd [at] LT',
-	            sameElse : 'L'
-	        },
-	        relativeTime : {
-	            future : 'in %s',
-	            past : '%s ago',
-	            s : 'a few seconds',
-	            m : 'a minute',
-	            mm : '%d minutes',
-	            h : 'an hour',
-	            hh : '%d hours',
-	            d : 'a day',
-	            dd : '%d days',
-	            M : 'a month',
-	            MM : '%d months',
-	            y : 'a year',
-	            yy : '%d years'
-	        },
-	        ordinalParse: /\d{1,2}(st|nd|rd|th)/,
-	        ordinal : function (number) {
-	            var b = number % 10,
-	                output = (~~(number % 100 / 10) === 1) ? 'th' :
-	                (b === 1) ? 'st' :
-	                (b === 2) ? 'nd' :
-	                (b === 3) ? 'rd' : 'th';
-	            return number + output;
-	        },
-	        week : {
-	            dow : 1, // Monday is the first day of the week.
-	            doy : 4  // The week that contains Jan 4th is the first week of the year.
-	        }
-	    });
-	
-	    return en_gb;
-	
-	}));
-
-/***/ },
-/* 7 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -17473,9 +17495,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * The Timekit JavaScript SDK is freely distributable under the MIT license.
 	 *
 	 */
-	var axios = __webpack_require__(8);
-	var base64 = __webpack_require__(27);
-	var humps = __webpack_require__(28);
+	var axios = __webpack_require__(7);
+	var base64 = __webpack_require__(26);
+	var humps = __webpack_require__(27);
 	
 	function Timekit() {
 	
@@ -18462,28 +18484,28 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 8 */
+/* 7 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(9);
+	module.exports = __webpack_require__(8);
 
 /***/ },
-/* 9 */
+/* 8 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	var defaults = __webpack_require__(10);
-	var utils = __webpack_require__(11);
-	var deprecatedMethod = __webpack_require__(12);
-	var dispatchRequest = __webpack_require__(13);
-	var InterceptorManager = __webpack_require__(21);
+	var defaults = __webpack_require__(9);
+	var utils = __webpack_require__(10);
+	var deprecatedMethod = __webpack_require__(11);
+	var dispatchRequest = __webpack_require__(12);
+	var InterceptorManager = __webpack_require__(20);
 	
 	// Polyfill ES6 Promise if needed
 	(function () {
 	  // webpack is being used to set es6-promise to the native Promise
 	  // for the standalone build. It's necessary to make sure polyfill exists.
-	  var P = __webpack_require__(22);
+	  var P = __webpack_require__(21);
 	  if (P && typeof P.polyfill === 'function') {
 	    P.polyfill();
 	  }
@@ -18546,7 +18568,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	axios.all = function (promises) {
 	  return Promise.all(promises);
 	};
-	axios.spread = __webpack_require__(26);
+	axios.spread = __webpack_require__(25);
 	
 	// Expose interceptors
 	axios.interceptors = {
@@ -18585,12 +18607,12 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 10 */
+/* 9 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	var utils = __webpack_require__(11);
+	var utils = __webpack_require__(10);
 	
 	var PROTECTION_PREFIX = /^\)\]\}',?\n/;
 	var DEFAULT_CONTENT_TYPE = {
@@ -18643,7 +18665,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 11 */
+/* 10 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -18866,7 +18888,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 12 */
+/* 11 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -18894,7 +18916,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 13 */
+/* 12 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -18911,11 +18933,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	    try {
 	      // For browsers use XHR adapter
 	      if (typeof window !== 'undefined') {
-	        __webpack_require__(15)(resolve, reject, config);
+	        __webpack_require__(14)(resolve, reject, config);
 	      }
 	      // For node use HTTP adapter
 	      else if (typeof process !== 'undefined') {
-	        __webpack_require__(15)(resolve, reject, config);
+	        __webpack_require__(14)(resolve, reject, config);
 	      }
 	    } catch (e) {
 	      reject(e);
@@ -18924,10 +18946,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 	
 	
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(14)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(13)))
 
 /***/ },
-/* 14 */
+/* 13 */
 /***/ function(module, exports) {
 
 	// shim for using process in browser
@@ -18939,6 +18961,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	var queueIndex = -1;
 	
 	function cleanUpNextTick() {
+	    if (!draining || !currentQueue) {
+	        return;
+	    }
 	    draining = false;
 	    if (currentQueue.length) {
 	        queue = currentQueue.concat(queue);
@@ -19024,20 +19049,20 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 15 */
+/* 14 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	/*global ActiveXObject:true*/
 	
-	var defaults = __webpack_require__(10);
-	var utils = __webpack_require__(11);
-	var buildUrl = __webpack_require__(16);
-	var cookies = __webpack_require__(17);
-	var parseHeaders = __webpack_require__(18);
-	var transformData = __webpack_require__(19);
-	var urlIsSameOrigin = __webpack_require__(20);
+	var defaults = __webpack_require__(9);
+	var utils = __webpack_require__(10);
+	var buildUrl = __webpack_require__(15);
+	var cookies = __webpack_require__(16);
+	var parseHeaders = __webpack_require__(17);
+	var transformData = __webpack_require__(18);
+	var urlIsSameOrigin = __webpack_require__(19);
 	
 	module.exports = function xhrAdapter(resolve, reject, config) {
 	  // Transform request data
@@ -19136,12 +19161,12 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 16 */
+/* 15 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	var utils = __webpack_require__(11);
+	var utils = __webpack_require__(10);
 	
 	function encode(val) {
 	  return encodeURIComponent(val).
@@ -19194,12 +19219,12 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 17 */
+/* 16 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	var utils = __webpack_require__(11);
+	var utils = __webpack_require__(10);
 	
 	module.exports = {
 	  write: function write(name, value, expires, path, domain, secure) {
@@ -19237,12 +19262,12 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 18 */
+/* 17 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	var utils = __webpack_require__(11);
+	var utils = __webpack_require__(10);
 	
 	/**
 	 * Parse headers into an object
@@ -19277,12 +19302,12 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 19 */
+/* 18 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	var utils = __webpack_require__(11);
+	var utils = __webpack_require__(10);
 	
 	/**
 	 * Transform the data for a request or a response
@@ -19302,12 +19327,12 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 20 */
+/* 19 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	var utils = __webpack_require__(11);
+	var utils = __webpack_require__(10);
 	var msie = /(msie|trident)/i.test(navigator.userAgent);
 	var urlParsingNode = document.createElement('a');
 	var originUrl;
@@ -19360,12 +19385,12 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 21 */
+/* 20 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	var utils = __webpack_require__(11);
+	var utils = __webpack_require__(10);
 	
 	function InterceptorManager() {
 	  this.handlers = [];
@@ -19418,7 +19443,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 22 */
+/* 21 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var require;var __WEBPACK_AMD_DEFINE_RESULT__;/* WEBPACK VAR INJECTION */(function(process, setImmediate, global, module) {/*!
@@ -19557,7 +19582,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    function lib$es6$promise$asap$$attemptVertex() {
 	      try {
 	        var r = require;
-	        var vertx = __webpack_require__(24);
+	        var vertx = __webpack_require__(23);
 	        lib$es6$promise$asap$$vertxNext = vertx.runOnLoop || vertx.runOnContext;
 	        return lib$es6$promise$asap$$useVertxTimer();
 	      } catch(e) {
@@ -20382,7 +20407,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    };
 	
 	    /* global define:true module:true window: true */
-	    if ("function" === 'function' && __webpack_require__(25)['amd']) {
+	    if ("function" === 'function' && __webpack_require__(24)['amd']) {
 	      !(__WEBPACK_AMD_DEFINE_RESULT__ = function() { return lib$es6$promise$umd$$ES6Promise; }.call(exports, __webpack_require__, exports, module), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
 	    } else if (typeof module !== 'undefined' && module['exports']) {
 	      module['exports'] = lib$es6$promise$umd$$ES6Promise;
@@ -20394,13 +20419,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	}).call(this);
 	
 	
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(14), __webpack_require__(23).setImmediate, (function() { return this; }()), __webpack_require__(4)(module)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(13), __webpack_require__(22).setImmediate, (function() { return this; }()), __webpack_require__(4)(module)))
 
 /***/ },
-/* 23 */
+/* 22 */
 /***/ function(module, exports, __webpack_require__) {
 
-	/* WEBPACK VAR INJECTION */(function(setImmediate, clearImmediate) {var nextTick = __webpack_require__(14).nextTick;
+	/* WEBPACK VAR INJECTION */(function(setImmediate, clearImmediate) {var nextTick = __webpack_require__(13).nextTick;
 	var apply = Function.prototype.apply;
 	var slice = Array.prototype.slice;
 	var immediateIds = {};
@@ -20476,23 +20501,23 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.clearImmediate = typeof clearImmediate === "function" ? clearImmediate : function(id) {
 	  delete immediateIds[id];
 	};
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(23).setImmediate, __webpack_require__(23).clearImmediate))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(22).setImmediate, __webpack_require__(22).clearImmediate))
 
 /***/ },
-/* 24 */
+/* 23 */
 /***/ function(module, exports) {
 
 	/* (ignored) */
 
 /***/ },
-/* 25 */
+/* 24 */
 /***/ function(module, exports) {
 
 	module.exports = function() { throw new Error("define cannot be used indirect"); };
 
 
 /***/ },
-/* 26 */
+/* 25 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -20525,7 +20550,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 27 */
+/* 26 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_RESULT__;/* WEBPACK VAR INJECTION */(function(module, global) {/*! http://mths.be/base64 v0.1.0 by @mathias | MIT license */
@@ -20695,7 +20720,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)(module), (function() { return this; }())))
 
 /***/ },
-/* 28 */
+/* 27 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;// =========
@@ -20832,7 +20857,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 29 */
+/* 28 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;//! moment-timezone.js
@@ -22034,7 +22059,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 30 */
+/* 29 */
 /***/ function(module, exports, __webpack_require__) {
 
 	(function(window) {
@@ -22248,12 +22273,12 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 31 */
+/* 30 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	__webpack_require__(32);
+	__webpack_require__(31);
 	
 	/*
 	 * Utily functions
@@ -22284,7 +22309,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 32 */
+/* 31 */
 /***/ function(module, exports) {
 
 	// Console-polyfill. MIT license.
@@ -22310,7 +22335,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 33 */
+/* 32 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -22331,7 +22356,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  bookingGraph: 'instant',
 	  bookingFields: {
 	    name: {
-	      placeholder: 'Full name',
+	      placeholder: 'Nom',
 	      prefilled: false,
 	      locked: false
 	    },
@@ -22342,28 +22367,28 @@ return /******/ (function(modules) { // webpackBootstrap
 	    },
 	    comment: {
 	      enabled: true,
-	      placeholder: 'Comment',
+	      placeholder: 'Commentaires',
 	      prefilled: false,
 	      required: false,
 	      locked: false
 	    },
 	    phone: {
 	      enabled: false,
-	      placeholder: 'Phone number',
+	      placeholder: 'Téléphone',
 	      prefilled: false,
 	      required: false,
 	      locked: false
 	    },
 	    voip: {
 	      enabled: false,
-	      placeholder: 'Skype username',
+	      placeholder: 'Skype',
 	      prefilled: false,
 	      required: false,
 	      locked: false
 	    },
 	    location: {
 	      enabled: false,
-	      placeholder: 'Location',
+	      placeholder: 'Localisation',
 	      prefilled: false,
 	      required: false,
 	      locked: false
@@ -22382,7 +22407,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    header: {
 	      left: '',
 	      center: '',
-	      right: 'today, prev, next'
+	      right: 'aujourd\'hui, précédent, suivant'
 	    },
 	    views: {
 	      agenda: {
@@ -22392,15 +22417,16 @@ return /******/ (function(modules) { // webpackBootstrap
 	    allDaySlot: false,
 	    scrollTime: '08:00:00',
 	    timezone: 'local',
-	    nowIndicator: true
+	    nowIndicator: true,
+	    lang: 'fr'
 	  },
 	  localization: {
 	    showTimezoneHelper: true,
-	    timeDateFormat: '12h-mdy-sun',
+	    timeDateFormat: '24h-dmy-mon',
 	    strings: {
-	      submitText: 'Book it',
-	      successMessageTitle: 'Thanks!',
-	      timezoneHelperLoading: 'Loading..',
+	      submitText: 'Réserver maintenant',
+	      successMessageTitle: 'Merci !',
+	      timezoneHelperLoading: 'Chargement ...',
 	      timezoneHelperDifferent: 'Your timezone is %s hours %s of %s (calendar shown in your local time)',
 	      timezoneHelperSame: 'You are in the same timezone as %s'
 	    }
@@ -22423,7 +22449,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  },
 	  localization: {
 	    strings: {
-	      successMessageBody: 'An invitation has been sent to: <br /> %s <br /><br /> Please accept the invitation to confirm the booking.'
+	      successMessageBody: 'Une invitation a été envoyée à&nbsp;: <br /> %s <br /><br /> Merci d\'accepter cette invitation pour confirmer la réservation.'
 	    }
 	  }
 	
@@ -22443,7 +22469,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  },
 	  localization: {
 	    strings: {
-	      successMessageBody: "We have received your request and we'll be in touch when we have reviewed it. <br /><br />Have a great day!"
+	      successMessageBody: "Nous avons bien reçu votre demande et nous vous contacterons lorsque nous l'aurons examinée. <br /><br />Passez une bonne journée&nbsp;!"
 	    }
 	  }
 	
@@ -22510,16 +22536,16 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 34 */
+/* 33 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 	
 	// load the styles
-	var content = __webpack_require__(35);
+	var content = __webpack_require__(34);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(37)(content, {"singleton":true});
+	var update = __webpack_require__(36)(content, {"singleton":true});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
@@ -22536,21 +22562,21 @@ return /******/ (function(modules) { // webpackBootstrap
 	}
 
 /***/ },
-/* 35 */
+/* 34 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(36)();
+	exports = module.exports = __webpack_require__(35)();
 	// imports
 	
 	
 	// module
-	exports.push([module.id, "/*!\n * FullCalendar v2.7.1 Stylesheet\n * Docs & License: http://fullcalendar.io/\n * (c) 2016 Adam Shaw\n */.fc{direction:ltr;text-align:left}.fc-rtl{text-align:right}body .fc{font-size:1em}.fc-unthemed .fc-content,.fc-unthemed .fc-divider,.fc-unthemed .fc-popover,.fc-unthemed .fc-row,.fc-unthemed tbody,.fc-unthemed td,.fc-unthemed th,.fc-unthemed thead{border-color:#ddd}.fc-unthemed .fc-popover{background-color:#fff}.fc-unthemed .fc-divider,.fc-unthemed .fc-popover .fc-header{background:#eee}.fc-unthemed .fc-popover .fc-header .fc-close{color:#666}.fc-unthemed .fc-today{background:#fcf8e3}.fc-highlight{background:#bce8f1}.fc-bgevent,.fc-highlight{opacity:.3;filter:alpha(opacity=30)}.fc-bgevent{background:#8fdf82}.fc-nonbusiness{background:#d7d7d7}.fc-icon{display:inline-block;height:1em;line-height:1em;font-size:1em;text-align:center;overflow:hidden;font-family:Courier New,Courier,monospace;-webkit-touch-callout:none;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.fc-icon:after{position:relative}.fc-icon-left-single-arrow:after{content:\"\\2039\";font-weight:700;font-size:200%;top:-7%}.fc-icon-right-single-arrow:after{content:\"\\203A\";font-weight:700;font-size:200%;top:-7%}.fc-icon-left-double-arrow:after{content:\"\\AB\";font-size:160%;top:-7%}.fc-icon-right-double-arrow:after{content:\"\\BB\";font-size:160%;top:-7%}.fc-icon-left-triangle:after{content:\"\\25C4\";font-size:125%;top:3%}.fc-icon-right-triangle:after{content:\"\\25BA\";font-size:125%;top:3%}.fc-icon-down-triangle:after{content:\"\\25BC\";font-size:125%;top:2%}.fc-icon-x:after{content:\"\\D7\";font-size:200%;top:6%}.fc button{box-sizing:border-box;margin:0;height:2.1em;padding:0 .6em;font-size:1em;white-space:nowrap;cursor:pointer}.fc button::-moz-focus-inner{margin:0;padding:0}.fc-state-default{border:1px solid}.fc-state-default.fc-corner-left{border-top-left-radius:4px;border-bottom-left-radius:4px}.fc-state-default.fc-corner-right{border-top-right-radius:4px;border-bottom-right-radius:4px}.fc button .fc-icon{position:relative;top:-.05em;margin:0 .2em;vertical-align:middle}.fc-state-default{background-color:#f5f5f5;background-image:-webkit-gradient(linear,0 0,0 100%,from(#fff),to(#e6e6e6));background-image:-webkit-linear-gradient(top,#fff,#e6e6e6);background-image:linear-gradient(180deg,#fff,#e6e6e6);background-repeat:repeat-x;border-color:#e6e6e6 #e6e6e6 #bfbfbf;border-color:rgba(0,0,0,.1) rgba(0,0,0,.1) rgba(0,0,0,.25);color:#333;text-shadow:0 1px 1px hsla(0,0%,100%,.75);box-shadow:inset 0 1px 0 hsla(0,0%,100%,.2),0 1px 2px rgba(0,0,0,.05)}.fc-state-active,.fc-state-disabled,.fc-state-down,.fc-state-hover{color:#333;background-color:#e6e6e6}.fc-state-hover{color:#333;text-decoration:none;background-position:0 -15px;-webkit-transition:background-position .1s linear;transition:background-position .1s linear}.fc-state-active,.fc-state-down{background-color:#ccc;background-image:none;box-shadow:inset 0 2px 4px rgba(0,0,0,.15),0 1px 2px rgba(0,0,0,.05)}.fc-state-disabled{cursor:default;background-image:none;opacity:.65;filter:alpha(opacity=65);box-shadow:none}.fc-button-group{display:inline-block}.fc .fc-button-group>*{float:left;margin:0 0 0 -1px}.fc .fc-button-group>:first-child{margin-left:0}.fc-popover{position:absolute;box-shadow:0 2px 6px rgba(0,0,0,.15)}.fc-popover .fc-header{padding:2px 4px}.fc-popover .fc-header .fc-title{margin:0 2px}.fc-popover .fc-header .fc-close{cursor:pointer}.fc-ltr .fc-popover .fc-header .fc-title,.fc-rtl .fc-popover .fc-header .fc-close{float:left}.fc-ltr .fc-popover .fc-header .fc-close,.fc-rtl .fc-popover .fc-header .fc-title{float:right}.fc-unthemed .fc-popover{border-width:1px;border-style:solid}.fc-unthemed .fc-popover .fc-header .fc-close{font-size:.9em;margin-top:2px}.fc-popover>.ui-widget-header+.ui-widget-content{border-top:0}.fc-divider{border-style:solid;border-width:1px}hr.fc-divider{height:0;margin:0;padding:0 0 2px;border-width:1px 0}.fc-clear{clear:both}.fc-bg,.fc-bgevent-skeleton,.fc-helper-skeleton,.fc-highlight-skeleton{position:absolute;top:0;left:0;right:0}.fc-bg{bottom:0}.fc-bg table{height:100%}.fc table{width:100%;table-layout:fixed;border-collapse:collapse;border-spacing:0;font-size:1em}.fc th{text-align:center}.fc td,.fc th{border-style:solid;border-width:1px;padding:0;vertical-align:top}.fc td.fc-today{border-style:double}.fc .fc-row{border-style:solid;border-width:0}.fc-row table{border-left:0 hidden transparent;border-right:0 hidden transparent;border-bottom:0 hidden transparent}.fc-row:first-child table{border-top:0 hidden transparent}.fc-row{position:relative}.fc-row .fc-bg{z-index:1}.fc-row .fc-bgevent-skeleton,.fc-row .fc-highlight-skeleton{bottom:0}.fc-row .fc-bgevent-skeleton table,.fc-row .fc-highlight-skeleton table{height:100%}.fc-row .fc-bgevent-skeleton td,.fc-row .fc-highlight-skeleton td{border-color:transparent}.fc-row .fc-bgevent-skeleton{z-index:2}.fc-row .fc-highlight-skeleton{z-index:3}.fc-row .fc-content-skeleton{position:relative;z-index:4;padding-bottom:2px}.fc-row .fc-helper-skeleton{z-index:5}.fc-row .fc-content-skeleton td,.fc-row .fc-helper-skeleton td{background:none;border-color:transparent;border-bottom:0}.fc-row .fc-content-skeleton tbody td,.fc-row .fc-helper-skeleton tbody td{border-top:0}.fc-scroller{-webkit-overflow-scrolling:touch}.fc-scroller>.fc-day-grid,.fc-scroller>.fc-time-grid{position:relative;width:100%}.fc-event{position:relative;display:block;font-size:.85em;line-height:1.3;border-radius:3px;border:1px solid #3a87ad;background-color:#3a87ad;font-weight:400}.fc-event,.fc-event:hover,.ui-widget .fc-event{color:#fff;text-decoration:none}.fc-event.fc-draggable,.fc-event[href]{cursor:pointer}.fc-not-allowed,.fc-not-allowed .fc-event{cursor:not-allowed}.fc-event .fc-bg{z-index:1;background:#fff;opacity:.25;filter:alpha(opacity=25)}.fc-event .fc-content{position:relative;z-index:2}.fc-event .fc-resizer{position:absolute;z-index:4}.fc-touch .fc-event .fc-resizer{display:none}.fc-touch .fc-event.fc-selected .fc-resizer{display:block}.fc-expander{position:relative}.fc-touch .fc-event .fc-resizer:before,.fc-touch .fc-expander:before{content:\"\";position:absolute;z-index:9999;top:50%;left:50%;width:40px;height:40px;margin-left:-20px;margin-top:-20px}.fc-event.fc-selected{z-index:9999!important;box-shadow:0 2px 5px rgba(0,0,0,.2)}.fc-event.fc-selected.fc-dragging{box-shadow:0 2px 7px rgba(0,0,0,.3)}.fc-h-event.fc-selected:before{content:\"\";position:absolute;z-index:3;top:-10px;bottom:-10px;left:0;right:0}.fc-ltr .fc-h-event.fc-not-start,.fc-rtl .fc-h-event.fc-not-end{margin-left:0;border-left-width:0;padding-left:1px;border-top-left-radius:0;border-bottom-left-radius:0}.fc-ltr .fc-h-event.fc-not-end,.fc-rtl .fc-h-event.fc-not-start{margin-right:0;border-right-width:0;padding-right:1px;border-top-right-radius:0;border-bottom-right-radius:0}.fc-ltr .fc-h-event .fc-start-resizer,.fc-rtl .fc-h-event .fc-end-resizer{cursor:w-resize;left:-1px}.fc-ltr .fc-h-event .fc-end-resizer,.fc-rtl .fc-h-event .fc-start-resizer{cursor:e-resize;right:-1px}.fc-cursor .fc-h-event .fc-resizer{width:7px;top:-1px;bottom:-1px}.fc-touch .fc-h-event .fc-resizer{border-radius:4px;border-width:1px;width:6px;height:6px;border-style:solid;border-color:inherit;background:#fff;top:50%;margin-top:-4px}.fc-touch.fc-ltr .fc-h-event .fc-start-resizer,.fc-touch.fc-rtl .fc-h-event .fc-end-resizer{margin-left:-4px}.fc-touch.fc-ltr .fc-h-event .fc-end-resizer,.fc-touch.fc-rtl .fc-h-event .fc-start-resizer{margin-right:-4px}.fc-day-grid-event{margin:1px 2px 0;padding:0 1px}.fc-day-grid-event.fc-selected:after{content:\"\";position:absolute;z-index:1;top:-1px;right:-1px;bottom:-1px;left:-1px;background:#000;opacity:.25;filter:alpha(opacity=25)}.fc-day-grid-event .fc-content{white-space:nowrap;overflow:hidden}.fc-day-grid-event .fc-time{font-weight:700}.fc-cursor.fc-ltr .fc-day-grid-event .fc-start-resizer,.fc-cursor.fc-rtl .fc-day-grid-event .fc-end-resizer{margin-left:-2px}.fc-cursor.fc-ltr .fc-day-grid-event .fc-end-resizer,.fc-cursor.fc-rtl .fc-day-grid-event .fc-start-resizer{margin-right:-2px}a.fc-more{margin:1px 3px;font-size:.85em;cursor:pointer;text-decoration:none}a.fc-more:hover{text-decoration:underline}.fc-limited{display:none}.fc-day-grid .fc-row{z-index:1}.fc-more-popover{z-index:2;width:220px}.fc-more-popover .fc-event-container{padding:10px}.fc-now-indicator{position:absolute;border:0 solid red}.fc-unselectable{-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;-webkit-touch-callout:none;-webkit-tap-highlight-color:rgba(0,0,0,0)}.fc-toolbar{text-align:center;margin-bottom:1em}.fc-toolbar .fc-left{float:left}.fc-toolbar .fc-right{float:right}.fc-toolbar .fc-center{display:inline-block}.fc .fc-toolbar>*>*{float:left;margin-left:.75em}.fc .fc-toolbar>*>:first-child{margin-left:0}.fc-toolbar h2{margin:0}.fc-toolbar button{position:relative}.fc-toolbar .fc-state-hover,.fc-toolbar .ui-state-hover{z-index:2}.fc-toolbar .fc-state-down{z-index:3}.fc-toolbar .fc-state-active,.fc-toolbar .ui-state-active{z-index:4}.fc-toolbar button:focus{z-index:5}.fc-view-container *,.fc-view-container :after,.fc-view-container :before{box-sizing:content-box}.fc-view,.fc-view>table{position:relative;z-index:1}.fc-basicDay-view .fc-content-skeleton,.fc-basicWeek-view .fc-content-skeleton{padding-top:1px;padding-bottom:1em}.fc-basic-view .fc-body .fc-row{min-height:4em}.fc-row.fc-rigid{overflow:hidden}.fc-row.fc-rigid .fc-content-skeleton{position:absolute;top:0;left:0;right:0}.fc-basic-view .fc-day-number,.fc-basic-view .fc-week-number{padding:0 2px}.fc-basic-view td.fc-day-number,.fc-basic-view td.fc-week-number span{padding-top:2px;padding-bottom:2px}.fc-basic-view .fc-week-number{text-align:center}.fc-basic-view .fc-week-number span{display:inline-block;min-width:1.25em}.fc-ltr .fc-basic-view .fc-day-number{text-align:right}.fc-rtl .fc-basic-view .fc-day-number{text-align:left}.fc-day-number.fc-other-month{opacity:.3;filter:alpha(opacity=30)}.fc-agenda-view .fc-day-grid{position:relative;z-index:2}.fc-agenda-view .fc-day-grid .fc-row{min-height:3em}.fc-agenda-view .fc-day-grid .fc-row .fc-content-skeleton{padding-top:1px;padding-bottom:1em}.fc .fc-axis{vertical-align:middle;padding:0 4px;white-space:nowrap}.fc-ltr .fc-axis{text-align:right}.fc-rtl .fc-axis{text-align:left}.ui-widget td.fc-axis{font-weight:400}.fc-time-grid,.fc-time-grid-container{position:relative;z-index:1}.fc-time-grid{min-height:100%}.fc-time-grid table{border:0 hidden transparent}.fc-time-grid>.fc-bg{z-index:1}.fc-time-grid .fc-slats,.fc-time-grid>hr{position:relative;z-index:2}.fc-time-grid .fc-content-col{position:relative}.fc-time-grid .fc-content-skeleton{position:absolute;z-index:3;top:0;left:0;right:0}.fc-time-grid .fc-business-container{position:relative;z-index:1}.fc-time-grid .fc-bgevent-container{position:relative;z-index:2}.fc-time-grid .fc-highlight-container{position:relative;z-index:3}.fc-time-grid .fc-event-container{position:relative;z-index:4}.fc-time-grid .fc-now-indicator-line{z-index:5}.fc-time-grid .fc-helper-container{position:relative;z-index:6}.fc-time-grid .fc-slats td{height:1.5em;border-bottom:0}.fc-time-grid .fc-slats .fc-minor td{border-top-style:dotted}.fc-time-grid .fc-slats .ui-widget-content{background:none}.fc-time-grid .fc-highlight-container{position:relative}.fc-time-grid .fc-highlight{position:absolute;left:0;right:0}.fc-ltr .fc-time-grid .fc-event-container{margin:0 2.5% 0 2px}.fc-rtl .fc-time-grid .fc-event-container{margin:0 2px 0 2.5%}.fc-time-grid .fc-bgevent,.fc-time-grid .fc-event{position:absolute;z-index:1}.fc-time-grid .fc-bgevent{left:0;right:0}.fc-v-event.fc-not-start{border-top-width:0;padding-top:1px;border-top-left-radius:0;border-top-right-radius:0}.fc-v-event.fc-not-end{border-bottom-width:0;padding-bottom:1px;border-bottom-left-radius:0;border-bottom-right-radius:0}.fc-time-grid-event{overflow:hidden}.fc-time-grid-event.fc-selected{overflow:visible}.fc-time-grid-event.fc-selected .fc-bg{display:none}.fc-time-grid-event .fc-content{overflow:hidden}.fc-time-grid-event .fc-time,.fc-time-grid-event .fc-title{padding:0 1px}.fc-time-grid-event .fc-time{font-size:.85em;white-space:nowrap}.fc-time-grid-event.fc-short .fc-content{white-space:nowrap}.fc-time-grid-event.fc-short .fc-time,.fc-time-grid-event.fc-short .fc-title{display:inline-block;vertical-align:top}.fc-time-grid-event.fc-short .fc-time span{display:none}.fc-time-grid-event.fc-short .fc-time:before{content:attr(data-start)}.fc-time-grid-event.fc-short .fc-time:after{content:\"\\A0-\\A0\"}.fc-time-grid-event.fc-short .fc-title{font-size:.85em;padding:0}.fc-cursor .fc-time-grid-event .fc-resizer{left:0;right:0;bottom:0;height:8px;overflow:hidden;line-height:8px;font-size:11px;font-family:monospace;text-align:center;cursor:s-resize}.fc-cursor .fc-time-grid-event .fc-resizer:after{content:\"=\"}.fc-touch .fc-time-grid-event .fc-resizer{border-radius:5px;border-width:1px;width:8px;height:8px;border-style:solid;border-color:inherit;background:#fff;left:50%;margin-left:-5px;bottom:-5px}.fc-time-grid .fc-now-indicator-line{border-top-width:1px;left:0;right:0}.fc-time-grid .fc-now-indicator-arrow{margin-top:-5px}.fc-ltr .fc-time-grid .fc-now-indicator-arrow{left:0;border-width:5px 0 5px 6px;border-top-color:transparent;border-bottom-color:transparent}.fc-rtl .fc-time-grid .fc-now-indicator-arrow{right:0;border-width:5px 6px 5px 0;border-top-color:transparent;border-bottom-color:transparent}", ""]);
+	exports.push([module.id, "/*!\n * FullCalendar v2.7.2 Stylesheet\n * Docs & License: http://fullcalendar.io/\n * (c) 2016 Adam Shaw\n */.fc{direction:ltr;text-align:left}.fc-rtl{text-align:right}body .fc{font-size:1em}.fc-unthemed .fc-content,.fc-unthemed .fc-divider,.fc-unthemed .fc-popover,.fc-unthemed .fc-row,.fc-unthemed tbody,.fc-unthemed td,.fc-unthemed th,.fc-unthemed thead{border-color:#ddd}.fc-unthemed .fc-popover{background-color:#fff}.fc-unthemed .fc-divider,.fc-unthemed .fc-popover .fc-header{background:#eee}.fc-unthemed .fc-popover .fc-header .fc-close{color:#666}.fc-unthemed .fc-today{background:#fcf8e3}.fc-highlight{background:#bce8f1}.fc-bgevent,.fc-highlight{opacity:.3;filter:alpha(opacity=30)}.fc-bgevent{background:#8fdf82}.fc-nonbusiness{background:#d7d7d7}.fc-icon{display:inline-block;height:1em;line-height:1em;font-size:1em;text-align:center;overflow:hidden;font-family:Courier New,Courier,monospace;-webkit-touch-callout:none;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.fc-icon:after{position:relative}.fc-icon-left-single-arrow:after{content:\"\\2039\";font-weight:700;font-size:200%;top:-7%}.fc-icon-right-single-arrow:after{content:\"\\203A\";font-weight:700;font-size:200%;top:-7%}.fc-icon-left-double-arrow:after{content:\"\\AB\";font-size:160%;top:-7%}.fc-icon-right-double-arrow:after{content:\"\\BB\";font-size:160%;top:-7%}.fc-icon-left-triangle:after{content:\"\\25C4\";font-size:125%;top:3%}.fc-icon-right-triangle:after{content:\"\\25BA\";font-size:125%;top:3%}.fc-icon-down-triangle:after{content:\"\\25BC\";font-size:125%;top:2%}.fc-icon-x:after{content:\"\\D7\";font-size:200%;top:6%}.fc button{box-sizing:border-box;margin:0;height:2.1em;padding:0 .6em;font-size:1em;white-space:nowrap;cursor:pointer}.fc button::-moz-focus-inner{margin:0;padding:0}.fc-state-default{border:1px solid}.fc-state-default.fc-corner-left{border-top-left-radius:4px;border-bottom-left-radius:4px}.fc-state-default.fc-corner-right{border-top-right-radius:4px;border-bottom-right-radius:4px}.fc button .fc-icon{position:relative;top:-.05em;margin:0 .2em;vertical-align:middle}.fc-state-default{background-color:#f5f5f5;background-image:-webkit-gradient(linear,0 0,0 100%,from(#fff),to(#e6e6e6));background-image:-webkit-linear-gradient(top,#fff,#e6e6e6);background-image:linear-gradient(180deg,#fff,#e6e6e6);background-repeat:repeat-x;border-color:#e6e6e6 #e6e6e6 #bfbfbf;border-color:rgba(0,0,0,.1) rgba(0,0,0,.1) rgba(0,0,0,.25);color:#333;text-shadow:0 1px 1px hsla(0,0%,100%,.75);box-shadow:inset 0 1px 0 hsla(0,0%,100%,.2),0 1px 2px rgba(0,0,0,.05)}.fc-state-active,.fc-state-disabled,.fc-state-down,.fc-state-hover{color:#333;background-color:#e6e6e6}.fc-state-hover{color:#333;text-decoration:none;background-position:0 -15px;-webkit-transition:background-position .1s linear;transition:background-position .1s linear}.fc-state-active,.fc-state-down{background-color:#ccc;background-image:none;box-shadow:inset 0 2px 4px rgba(0,0,0,.15),0 1px 2px rgba(0,0,0,.05)}.fc-state-disabled{cursor:default;background-image:none;opacity:.65;filter:alpha(opacity=65);box-shadow:none}.fc-button-group{display:inline-block}.fc .fc-button-group>*{float:left;margin:0 0 0 -1px}.fc .fc-button-group>:first-child{margin-left:0}.fc-popover{position:absolute;box-shadow:0 2px 6px rgba(0,0,0,.15)}.fc-popover .fc-header{padding:2px 4px}.fc-popover .fc-header .fc-title{margin:0 2px}.fc-popover .fc-header .fc-close{cursor:pointer}.fc-ltr .fc-popover .fc-header .fc-title,.fc-rtl .fc-popover .fc-header .fc-close{float:left}.fc-ltr .fc-popover .fc-header .fc-close,.fc-rtl .fc-popover .fc-header .fc-title{float:right}.fc-unthemed .fc-popover{border-width:1px;border-style:solid}.fc-unthemed .fc-popover .fc-header .fc-close{font-size:.9em;margin-top:2px}.fc-popover>.ui-widget-header+.ui-widget-content{border-top:0}.fc-divider{border-style:solid;border-width:1px}hr.fc-divider{height:0;margin:0;padding:0 0 2px;border-width:1px 0}.fc-clear{clear:both}.fc-bg,.fc-bgevent-skeleton,.fc-helper-skeleton,.fc-highlight-skeleton{position:absolute;top:0;left:0;right:0}.fc-bg{bottom:0}.fc-bg table{height:100%}.fc table{width:100%;table-layout:fixed;border-collapse:collapse;border-spacing:0;font-size:1em}.fc th{text-align:center}.fc td,.fc th{border-style:solid;border-width:1px;padding:0;vertical-align:top}.fc td.fc-today{border-style:double}.fc .fc-row{border-style:solid;border-width:0}.fc-row table{border-left:0 hidden transparent;border-right:0 hidden transparent;border-bottom:0 hidden transparent}.fc-row:first-child table{border-top:0 hidden transparent}.fc-row{position:relative}.fc-row .fc-bg{z-index:1}.fc-row .fc-bgevent-skeleton,.fc-row .fc-highlight-skeleton{bottom:0}.fc-row .fc-bgevent-skeleton table,.fc-row .fc-highlight-skeleton table{height:100%}.fc-row .fc-bgevent-skeleton td,.fc-row .fc-highlight-skeleton td{border-color:transparent}.fc-row .fc-bgevent-skeleton{z-index:2}.fc-row .fc-highlight-skeleton{z-index:3}.fc-row .fc-content-skeleton{position:relative;z-index:4;padding-bottom:2px}.fc-row .fc-helper-skeleton{z-index:5}.fc-row .fc-content-skeleton td,.fc-row .fc-helper-skeleton td{background:none;border-color:transparent;border-bottom:0}.fc-row .fc-content-skeleton tbody td,.fc-row .fc-helper-skeleton tbody td{border-top:0}.fc-scroller{-webkit-overflow-scrolling:touch}.fc-scroller>.fc-day-grid,.fc-scroller>.fc-time-grid{position:relative;width:100%}.fc-event{position:relative;display:block;font-size:.85em;line-height:1.3;border-radius:3px;border:1px solid #3a87ad;background-color:#3a87ad;font-weight:400}.fc-event,.fc-event:hover,.ui-widget .fc-event{color:#fff;text-decoration:none}.fc-event.fc-draggable,.fc-event[href]{cursor:pointer}.fc-not-allowed,.fc-not-allowed .fc-event{cursor:not-allowed}.fc-event .fc-bg{z-index:1;background:#fff;opacity:.25;filter:alpha(opacity=25)}.fc-event .fc-content{position:relative;z-index:2}.fc-event .fc-resizer{position:absolute;z-index:4;display:none}.fc-event.fc-allow-mouse-resize .fc-resizer,.fc-event.fc-selected .fc-resizer{display:block}.fc-event.fc-selected .fc-resizer:before{content:\"\";position:absolute;z-index:9999;top:50%;left:50%;width:40px;height:40px;margin-left:-20px;margin-top:-20px}.fc-event.fc-selected{z-index:9999!important;box-shadow:0 2px 5px rgba(0,0,0,.2)}.fc-event.fc-selected.fc-dragging{box-shadow:0 2px 7px rgba(0,0,0,.3)}.fc-h-event.fc-selected:before{content:\"\";position:absolute;z-index:3;top:-10px;bottom:-10px;left:0;right:0}.fc-ltr .fc-h-event.fc-not-start,.fc-rtl .fc-h-event.fc-not-end{margin-left:0;border-left-width:0;padding-left:1px;border-top-left-radius:0;border-bottom-left-radius:0}.fc-ltr .fc-h-event.fc-not-end,.fc-rtl .fc-h-event.fc-not-start{margin-right:0;border-right-width:0;padding-right:1px;border-top-right-radius:0;border-bottom-right-radius:0}.fc-ltr .fc-h-event .fc-start-resizer,.fc-rtl .fc-h-event .fc-end-resizer{cursor:w-resize;left:-1px}.fc-ltr .fc-h-event .fc-end-resizer,.fc-rtl .fc-h-event .fc-start-resizer{cursor:e-resize;right:-1px}.fc-h-event.fc-allow-mouse-resize .fc-resizer{width:7px;top:-1px;bottom:-1px}.fc-h-event.fc-selected .fc-resizer{border-radius:4px;border-width:1px;width:6px;height:6px;border-style:solid;border-color:inherit;background:#fff;top:50%;margin-top:-4px}.fc-ltr .fc-h-event.fc-selected .fc-start-resizer,.fc-rtl .fc-h-event.fc-selected .fc-end-resizer{margin-left:-4px}.fc-ltr .fc-h-event.fc-selected .fc-end-resizer,.fc-rtl .fc-h-event.fc-selected .fc-start-resizer{margin-right:-4px}.fc-day-grid-event{margin:1px 2px 0;padding:0 1px}.fc-day-grid-event.fc-selected:after{content:\"\";position:absolute;z-index:1;top:-1px;right:-1px;bottom:-1px;left:-1px;background:#000;opacity:.25;filter:alpha(opacity=25)}.fc-day-grid-event .fc-content{white-space:nowrap;overflow:hidden}.fc-day-grid-event .fc-time{font-weight:700}.fc-ltr .fc-day-grid-event.fc-allow-mouse-resize .fc-start-resizer,.fc-rtl .fc-day-grid-event.fc-allow-mouse-resize .fc-end-resizer{margin-left:-2px}.fc-ltr .fc-day-grid-event.fc-allow-mouse-resize .fc-end-resizer,.fc-rtl .fc-day-grid-event.fc-allow-mouse-resize .fc-start-resizer{margin-right:-2px}a.fc-more{margin:1px 3px;font-size:.85em;cursor:pointer;text-decoration:none}a.fc-more:hover{text-decoration:underline}.fc-limited{display:none}.fc-day-grid .fc-row{z-index:1}.fc-more-popover{z-index:2;width:220px}.fc-more-popover .fc-event-container{padding:10px}.fc-now-indicator{position:absolute;border:0 solid red}.fc-unselectable{-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;-webkit-touch-callout:none;-webkit-tap-highlight-color:rgba(0,0,0,0)}.fc-toolbar{text-align:center;margin-bottom:1em}.fc-toolbar .fc-left{float:left}.fc-toolbar .fc-right{float:right}.fc-toolbar .fc-center{display:inline-block}.fc .fc-toolbar>*>*{float:left;margin-left:.75em}.fc .fc-toolbar>*>:first-child{margin-left:0}.fc-toolbar h2{margin:0}.fc-toolbar button{position:relative}.fc-toolbar .fc-state-hover,.fc-toolbar .ui-state-hover{z-index:2}.fc-toolbar .fc-state-down{z-index:3}.fc-toolbar .fc-state-active,.fc-toolbar .ui-state-active{z-index:4}.fc-toolbar button:focus{z-index:5}.fc-view-container *,.fc-view-container :after,.fc-view-container :before{box-sizing:content-box}.fc-view,.fc-view>table{position:relative;z-index:1}.fc-basicDay-view .fc-content-skeleton,.fc-basicWeek-view .fc-content-skeleton{padding-top:1px;padding-bottom:1em}.fc-basic-view .fc-body .fc-row{min-height:4em}.fc-row.fc-rigid{overflow:hidden}.fc-row.fc-rigid .fc-content-skeleton{position:absolute;top:0;left:0;right:0}.fc-basic-view .fc-day-number,.fc-basic-view .fc-week-number{padding:0 2px}.fc-basic-view td.fc-day-number,.fc-basic-view td.fc-week-number span{padding-top:2px;padding-bottom:2px}.fc-basic-view .fc-week-number{text-align:center}.fc-basic-view .fc-week-number span{display:inline-block;min-width:1.25em}.fc-ltr .fc-basic-view .fc-day-number{text-align:right}.fc-rtl .fc-basic-view .fc-day-number{text-align:left}.fc-day-number.fc-other-month{opacity:.3;filter:alpha(opacity=30)}.fc-agenda-view .fc-day-grid{position:relative;z-index:2}.fc-agenda-view .fc-day-grid .fc-row{min-height:3em}.fc-agenda-view .fc-day-grid .fc-row .fc-content-skeleton{padding-top:1px;padding-bottom:1em}.fc .fc-axis{vertical-align:middle;padding:0 4px;white-space:nowrap}.fc-ltr .fc-axis{text-align:right}.fc-rtl .fc-axis{text-align:left}.ui-widget td.fc-axis{font-weight:400}.fc-time-grid,.fc-time-grid-container{position:relative;z-index:1}.fc-time-grid{min-height:100%}.fc-time-grid table{border:0 hidden transparent}.fc-time-grid>.fc-bg{z-index:1}.fc-time-grid .fc-slats,.fc-time-grid>hr{position:relative;z-index:2}.fc-time-grid .fc-content-col{position:relative}.fc-time-grid .fc-content-skeleton{position:absolute;z-index:3;top:0;left:0;right:0}.fc-time-grid .fc-business-container{position:relative;z-index:1}.fc-time-grid .fc-bgevent-container{position:relative;z-index:2}.fc-time-grid .fc-highlight-container{position:relative;z-index:3}.fc-time-grid .fc-event-container{position:relative;z-index:4}.fc-time-grid .fc-now-indicator-line{z-index:5}.fc-time-grid .fc-helper-container{position:relative;z-index:6}.fc-time-grid .fc-slats td{height:1.5em;border-bottom:0}.fc-time-grid .fc-slats .fc-minor td{border-top-style:dotted}.fc-time-grid .fc-slats .ui-widget-content{background:none}.fc-time-grid .fc-highlight-container{position:relative}.fc-time-grid .fc-highlight{position:absolute;left:0;right:0}.fc-ltr .fc-time-grid .fc-event-container{margin:0 2.5% 0 2px}.fc-rtl .fc-time-grid .fc-event-container{margin:0 2px 0 2.5%}.fc-time-grid .fc-bgevent,.fc-time-grid .fc-event{position:absolute;z-index:1}.fc-time-grid .fc-bgevent{left:0;right:0}.fc-v-event.fc-not-start{border-top-width:0;padding-top:1px;border-top-left-radius:0;border-top-right-radius:0}.fc-v-event.fc-not-end{border-bottom-width:0;padding-bottom:1px;border-bottom-left-radius:0;border-bottom-right-radius:0}.fc-time-grid-event{overflow:hidden}.fc-time-grid-event.fc-selected{overflow:visible}.fc-time-grid-event.fc-selected .fc-bg{display:none}.fc-time-grid-event .fc-content{overflow:hidden}.fc-time-grid-event .fc-time,.fc-time-grid-event .fc-title{padding:0 1px}.fc-time-grid-event .fc-time{font-size:.85em;white-space:nowrap}.fc-time-grid-event.fc-short .fc-content{white-space:nowrap}.fc-time-grid-event.fc-short .fc-time,.fc-time-grid-event.fc-short .fc-title{display:inline-block;vertical-align:top}.fc-time-grid-event.fc-short .fc-time span{display:none}.fc-time-grid-event.fc-short .fc-time:before{content:attr(data-start)}.fc-time-grid-event.fc-short .fc-time:after{content:\"\\A0-\\A0\"}.fc-time-grid-event.fc-short .fc-title{font-size:.85em;padding:0}.fc-time-grid-event.fc-allow-mouse-resize .fc-resizer{left:0;right:0;bottom:0;height:8px;overflow:hidden;line-height:8px;font-size:11px;font-family:monospace;text-align:center;cursor:s-resize}.fc-time-grid-event.fc-allow-mouse-resize .fc-resizer:after{content:\"=\"}.fc-time-grid-event.fc-selected .fc-resizer{border-radius:5px;border-width:1px;width:8px;height:8px;border-style:solid;border-color:inherit;background:#fff;left:50%;margin-left:-5px;bottom:-5px}.fc-time-grid .fc-now-indicator-line{border-top-width:1px;left:0;right:0}.fc-time-grid .fc-now-indicator-arrow{margin-top:-5px}.fc-ltr .fc-time-grid .fc-now-indicator-arrow{left:0;border-width:5px 0 5px 6px;border-top-color:transparent;border-bottom-color:transparent}.fc-rtl .fc-time-grid .fc-now-indicator-arrow{right:0;border-width:5px 6px 5px 0;border-top-color:transparent;border-bottom-color:transparent}", ""]);
 	
 	// exports
 
 
 /***/ },
-/* 36 */
+/* 35 */
 /***/ function(module, exports) {
 
 	/*
@@ -22606,7 +22632,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 37 */
+/* 36 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/*
@@ -22858,16 +22884,16 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 38 */
+/* 37 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 	
 	// load the styles
-	var content = __webpack_require__(39);
+	var content = __webpack_require__(38);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(37)(content, {"singleton":true});
+	var update = __webpack_require__(36)(content, {"singleton":true});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
@@ -22884,10 +22910,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	}
 
 /***/ },
-/* 39 */
+/* 38 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(36)();
+	exports = module.exports = __webpack_require__(35)();
 	// imports
 	
 	
@@ -22898,16 +22924,16 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 40 */
+/* 39 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 	
 	// load the styles
-	var content = __webpack_require__(41);
+	var content = __webpack_require__(40);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(37)(content, {"singleton":true});
+	var update = __webpack_require__(36)(content, {"singleton":true});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
@@ -22924,10 +22950,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	}
 
 /***/ },
-/* 41 */
+/* 40 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(36)();
+	exports = module.exports = __webpack_require__(35)();
 	// imports
 	
 	
@@ -22938,16 +22964,16 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 42 */
+/* 41 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 	
 	// load the styles
-	var content = __webpack_require__(43);
+	var content = __webpack_require__(42);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(37)(content, {"singleton":true});
+	var update = __webpack_require__(36)(content, {"singleton":true});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
@@ -22964,34 +22990,34 @@ return /******/ (function(modules) { // webpackBootstrap
 	}
 
 /***/ },
-/* 43 */
+/* 42 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(36)();
+	exports = module.exports = __webpack_require__(35)();
 	// imports
 	exports.push([module.id, "@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,600);", ""]);
 	
 	// module
-	exports.push([module.id, "/*!\n * Booking.js\n * http://timekit.io\n * (c) 2015 Timekit Inc.\n */.bookingjs{position:relative;font-family:Open Sans,Helvetica,Tahoma,Arial,sans-serif;font-size:13px;border-radius:4px;background-color:#fff;box-shadow:rgba(0,0,0,.2) 0 2px 4px 0;margin:20px auto;z-index:10;opacity:0;color:#333;border-top:1px solid #ececec}.bookingjs.show{-webkit-transition:opacity .3s ease;transition:opacity .3s ease;opacity:1}.bookingjs.has-avatar{margin-top:60px}.is-small.has-avatar.has-displayname .bookingjs-calendar .fc-toolbar{padding-bottom:24px}.is-small .bookingjs-calendar .fc-toolbar>.fc-right>button.fc-today-button{position:absolute;left:15px}.bookingjs-timezonehelper{color:#aeaeae;text-align:center;padding:7px 10px;background-color:#fbfbfb;border-top:1px solid #ececec;min-height:15px;z-index:20;border-radius:0 0 4px 4px}.bookingjs-timezoneicon{width:10px;margin-right:5px}.bookingjs-avatar{position:absolute;top:-50px;left:50%;-webkit-transform:translateX(-50%);transform:translateX(-50%);border-radius:150px;border:3px solid #fff;box-shadow:0 1px 3px 0 rgba(0,0,0,.13);overflow:hidden;z-index:40;background-color:#fff}.is-small .bookingjs-avatar{top:-40px}.bookingjs-avatar img{max-width:100%;vertical-align:middle;display:inline-block;width:80px;height:80px}.is-small .bookingjs-avatar img{width:70px;height:70px}.bookingjs-displayname{position:absolute;top:0;left:0;padding:15px 20px;color:#333;font-weight:600}.is-small .bookingjs-displayname{text-align:center;width:100%;box-sizing:border-box}.is-small.has-avatar .bookingjs-displayname{top:44px;padding:0 20px}.bookingjs-bookpage{position:absolute;height:100%;width:100%;top:0;left:0;background-color:#fbfbfb;z-index:30;opacity:0;-webkit-transition:opacity .2s ease;transition:opacity .2s ease;border-radius:4px}.bookingjs-bookpage.show{opacity:1}.bookingjs-bookpage-close{position:absolute;top:0;right:0;padding:18px;-webkit-transition:opacity .2s ease;transition:opacity .2s ease;opacity:.3}.bookingjs-bookpage-close:hover{opacity:1}.bookingjs-bookpage-date,.bookingjs-bookpage h2{text-align:center;font-size:34px;font-weight:400;margin-top:70px;margin-bottom:10px}.is-small .bookingjs-bookpage-date,.is-small .bookingjs-bookpage h2{font-size:27px;margin-top:60px}.bookingjs-bookpage-time,.bookingjs-bookpage h3{text-align:center;font-size:17px;font-weight:400;margin-bottom:50px;margin-top:10px}.is-small .bookingjs-bookpage-time,.is-small .bookingjs-bookpage h3{font-size:15px;margin-bottom:35px}.bookingjs-closeicon{width:15px}.bookingjs-form{width:350px;position:relative;margin:0 auto;text-align:center}.is-small .bookingjs-form{width:90%}.bookingjs-form-box{position:relative;box-shadow:0 1px 3px 0 rgba(0,0,0,.1);overflow:hidden;background-color:#fff;line-height:0}.bookingjs-form-success-message{position:absolute;top:-999px;left:0;right:0;padding:30px;background-color:#fff;opacity:0;-webkit-transition:opacity .3s ease;transition:opacity .3s ease;line-height:normal}.is-small .bookingjs-form-success-message{padding:22px 10px}.bookingjs-form-success-message .title{font-size:20px;display:block;margin-bottom:25px}.bookingjs-form-success-message .body{display:block}.bookingjs-form-success-message .body .booked-email{color:#aeaeae}.bookingjs-form.success .bookingjs-form-success-message{opacity:1;top:0;bottom:0}.bookingjs-form-input,.bookingjs-form input,.bookingjs-form input:invalid textarea,.bookingjs-form textarea:invalid{-webkit-transition:box-shadow .2s ease;transition:box-shadow .2s ease;width:100%;padding:15px 25px;margin:0;border:0 solid #ececec;font-size:1em;box-shadow:inset 0 0 1px 1px hsla(0,0%,100%,0);text-align:left;box-sizing:border-box;line-height:normal;font-family:Open Sans,Helvetica,Tahoma,Arial,sans-serif;color:#333}.bookingjs-form-input:focus,.bookingjs-form input:focus,.bookingjs-form input:invalid textarea:focus,.bookingjs-form textarea:invalid:focus{outline:0;box-shadow:inset 0 0 1px 1px #689ad8}.bookingjs-form-input.hidden,.bookingjs-form input.hidden,.bookingjs-form input:invalid textarea.hidden,.bookingjs-form textarea:invalid.hidden{display:none}.bookingjs-form-input:-moz-read-only,.bookingjs-form input:-moz-read-only,.bookingjs-form input:invalid textarea:-moz-read-only,.bookingjs-form textarea:invalid:-moz-read-only{cursor:not-allowed;font-style:italic}.bookingjs-form-input:read-only,.bookingjs-form input:invalid textarea:read-only,.bookingjs-form input:read-only,.bookingjs-form textarea:invalid:read-only{cursor:not-allowed;font-style:italic}.bookingjs-form-input:-moz-read-only:focus,.bookingjs-form input:-moz-read-only:focus,.bookingjs-form input:invalid textarea:-moz-read-only:focus,.bookingjs-form textarea:invalid:-moz-read-only:focus{box-shadow:inset 0 0 1px 1px #d8d8d8}.bookingjs-form-input:read-only:focus,.bookingjs-form input:invalid textarea:read-only:focus,.bookingjs-form input:read-only:focus,.bookingjs-form textarea:invalid:read-only:focus{box-shadow:inset 0 0 1px 1px #d8d8d8}.bookingjs-form-button{position:relative;-webkit-transition:background-color .2s,max-width .3s;transition:background-color .2s,max-width .3s;display:inline-block;padding:13px 25px;background-color:#689ad8;text-transform:uppercase;box-shadow:0 1px 3px 0 rgba(0,0,0,.15);color:#fff;border:0;border-radius:3px;font-size:1.1em;font-weight:600;margin-top:30px;cursor:pointer;height:44px;outline:0;text-align:center;max-width:200px}.bookingjs-form-button .error-text,.bookingjs-form-button .loading-text,.bookingjs-form-button .success-text{-webkit-transition:opacity .3s ease;transition:opacity .3s ease;position:absolute;top:13px;left:50%;-webkit-transform:translateX(-50%);transform:translateX(-50%);opacity:0}.bookingjs-form-button .inactive-text{white-space:nowrap;opacity:1}.bookingjs-form-button .loading-text svg{height:19px;width:19px;-webkit-animation:spin .6s infinite linear;animation:spin .6s infinite linear}.bookingjs-form-button .error-text svg{height:15px;width:15px;margin-top:2px}.bookingjs-form-button .success-text svg{height:15px;margin-top:2px;-webkit-transform:scale(0);transform:scale(0);-webkit-transition:-webkit-transform .6s ease;transition:-webkit-transform .6s ease;transition:transform .6s ease;transition:transform .6s ease,-webkit-transform .6s ease}.bookingjs-form-button:focus,.bookingjs-form-button:hover{background-color:#3f7fce}.bookingjs-form-button.button-shake{-webkit-animation:shake .5s 1 ease;animation:shake .5s 1 ease}.bookingjs-form.loading .bookingjs-form-button,.bookingjs-form.loading .bookingjs-form-button:hover{max-width:80px;background-color:#b1b1b1;cursor:not-allowed}.bookingjs-form.loading .bookingjs-form-button .inactive-text,.bookingjs-form.loading .bookingjs-form-button:hover .inactive-text{opacity:0}.bookingjs-form.loading .bookingjs-form-button .loading-text,.bookingjs-form.loading .bookingjs-form-button:hover .loading-text{opacity:1}.bookingjs-form.error .bookingjs-form-button,.bookingjs-form.error .bookingjs-form-button:hover{max-width:80px;background-color:#d83b46;cursor:not-allowed}.bookingjs-form.error .bookingjs-form-button .inactive-text,.bookingjs-form.error .bookingjs-form-button:hover .inactive-text{opacity:0}.bookingjs-form.error .bookingjs-form-button .error-text,.bookingjs-form.error .bookingjs-form-button:hover .error-text{opacity:1}.bookingjs-form.success .bookingjs-form-button,.bookingjs-form.success .bookingjs-form-button:hover{max-width:80px;background-color:#5baf56;cursor:not-allowed}.bookingjs-form.success .bookingjs-form-button .inactive-text,.bookingjs-form.success .bookingjs-form-button:hover .inactive-text{opacity:0}.bookingjs-form.success .bookingjs-form-button .success-text,.bookingjs-form.success .bookingjs-form-button:hover .success-text{opacity:1}.bookingjs-form.success .bookingjs-form-button .success-text svg,.bookingjs-form.success .bookingjs-form-button:hover .success-text svg{-webkit-transform:scale(1);transform:scale(1)}.bookingjs-poweredby{position:absolute;bottom:0;left:0;right:0;text-align:center;padding:7px 10px}.bookingjs-poweredby a{-webkit-transition:color .2s ease;transition:color .2s ease;color:#aeaeae;text-decoration:none}.bookingjs-poweredby a svg path{-webkit-transition:fill .2s ease;transition:fill .2s ease;fill:#aeaeae}.bookingjs-poweredby a:hover{color:#333}.bookingjs-poweredby a:hover svg path{fill:#333}.bookingjs-timekitlogo{width:15px;height:15px;margin-right:5px;vertical-align:sub}", ""]);
+	exports.push([module.id, "/*!\r\n * Booking.js\r\n * http://timekit.io\r\n * (c) 2015 Timekit Inc.\r\n */.bookingjs{position:relative;font-family:Open Sans,Helvetica,Tahoma,Arial,sans-serif;font-size:13px;border-radius:4px;background-color:#fff;box-shadow:0 2px 4px 0 rgba(0,0,0,.2);margin:20px auto;z-index:10;opacity:0;color:#333;border-top:1px solid #ececec}.bookingjs.show{-webkit-transition:opacity .3s ease;transition:opacity .3s ease;opacity:1}.bookingjs.has-avatar{margin-top:60px}.is-small.has-avatar.has-displayname .bookingjs-calendar .fc-toolbar{padding-bottom:24px}.is-small .bookingjs-calendar .fc-toolbar>.fc-right>button.fc-today-button{position:absolute;left:15px}.bookingjs-timezonehelper{color:#aeaeae;text-align:center;padding:7px 10px;background-color:#fbfbfb;border-top:1px solid #ececec;min-height:15px;z-index:20;border-radius:0 0 4px 4px}.bookingjs-timezoneicon{width:10px;margin-right:5px}.bookingjs-avatar{position:absolute;top:-50px;left:50%;-webkit-transform:translateX(-50%);transform:translateX(-50%);border-radius:150px;border:3px solid #fff;box-shadow:0 1px 3px 0 rgba(0,0,0,.13);overflow:hidden;z-index:40;background-color:#fff}.is-small .bookingjs-avatar{top:-40px}.bookingjs-avatar img{max-width:100%;vertical-align:middle;display:inline-block;width:80px;height:80px}.is-small .bookingjs-avatar img{width:70px;height:70px}.bookingjs-displayname{position:absolute;top:0;left:0;padding:15px 20px;color:#333;font-weight:600}.is-small .bookingjs-displayname{text-align:center;width:100%;box-sizing:border-box}.is-small.has-avatar .bookingjs-displayname{top:44px;padding:0 20px}.bookingjs-bookpage{position:absolute;height:100%;width:100%;top:0;left:0;background-color:#fbfbfb;z-index:30;opacity:0;-webkit-transition:opacity .2s ease;transition:opacity .2s ease;border-radius:4px}.bookingjs-bookpage.show{opacity:1}.bookingjs-bookpage-close{position:absolute;top:0;right:0;padding:18px;-webkit-transition:opacity .2s ease;transition:opacity .2s ease;opacity:.3}.bookingjs-bookpage-close:hover{opacity:1}.bookingjs-bookpage-date,.bookingjs-bookpage h2{text-align:center;font-size:34px;font-weight:400;margin-top:70px;margin-bottom:10px}.is-small .bookingjs-bookpage-date,.is-small .bookingjs-bookpage h2{font-size:27px;margin-top:60px}.bookingjs-bookpage-time,.bookingjs-bookpage h3{text-align:center;font-size:17px;font-weight:400;margin-bottom:50px;margin-top:10px}.is-small .bookingjs-bookpage-time,.is-small .bookingjs-bookpage h3{font-size:15px;margin-bottom:35px}.bookingjs-closeicon{width:15px}.bookingjs-form{width:350px;position:relative;margin:0 auto;text-align:center}.is-small .bookingjs-form{width:90%}.bookingjs-form-box{position:relative;box-shadow:0 1px 3px 0 rgba(0,0,0,.1);overflow:hidden;background-color:#fff;line-height:0}.bookingjs-form-success-message{position:absolute;top:-999px;left:0;right:0;padding:30px;background-color:#fff;opacity:0;-webkit-transition:opacity .3s ease;transition:opacity .3s ease;line-height:normal}.is-small .bookingjs-form-success-message{padding:22px 10px}.bookingjs-form-success-message .title{font-size:20px;display:block;margin-bottom:25px}.bookingjs-form-success-message .body{display:block}.bookingjs-form-success-message .body .booked-email{color:#aeaeae}.bookingjs-form.success .bookingjs-form-success-message{opacity:1;top:0;bottom:0}.bookingjs-form-input,.bookingjs-form input,.bookingjs-form input:invalid textarea,.bookingjs-form textarea:invalid{-webkit-transition:box-shadow .2s ease;transition:box-shadow .2s ease;width:100%;padding:15px 25px;margin:0;border:0 solid #ececec;font-size:1em;box-shadow:inset 0 0 1px 1px hsla(0,0%,100%,0);text-align:left;box-sizing:border-box;line-height:normal;font-family:Open Sans,Helvetica,Tahoma,Arial,sans-serif;color:#333}.bookingjs-form-input:focus,.bookingjs-form input:focus,.bookingjs-form input:invalid textarea:focus,.bookingjs-form textarea:invalid:focus{outline:0;box-shadow:inset 0 0 1px 1px #689ad8}.bookingjs-form-input.hidden,.bookingjs-form input.hidden,.bookingjs-form input:invalid textarea.hidden,.bookingjs-form textarea:invalid.hidden{display:none}.bookingjs-form-input:-moz-read-only,.bookingjs-form input:-moz-read-only,.bookingjs-form input:invalid textarea:-moz-read-only,.bookingjs-form textarea:invalid:-moz-read-only{cursor:not-allowed;font-style:italic}.bookingjs-form-input:read-only,.bookingjs-form input:invalid textarea:read-only,.bookingjs-form input:read-only,.bookingjs-form textarea:invalid:read-only{cursor:not-allowed;font-style:italic}.bookingjs-form-input:-moz-read-only:focus,.bookingjs-form input:-moz-read-only:focus,.bookingjs-form input:invalid textarea:-moz-read-only:focus,.bookingjs-form textarea:invalid:-moz-read-only:focus{box-shadow:inset 0 0 1px 1px #d8d8d8}.bookingjs-form-input:read-only:focus,.bookingjs-form input:invalid textarea:read-only:focus,.bookingjs-form input:read-only:focus,.bookingjs-form textarea:invalid:read-only:focus{box-shadow:inset 0 0 1px 1px #d8d8d8}.bookingjs-form-button{position:relative;-webkit-transition:background-color .2s,max-width .3s;transition:background-color .2s,max-width .3s;display:inline-block;padding:13px 25px;background-color:#689ad8;text-transform:uppercase;box-shadow:0 1px 3px 0 rgba(0,0,0,.15);color:#fff;border:0;border-radius:3px;font-size:1.1em;font-weight:600;margin-top:30px;cursor:pointer;height:44px;outline:0;text-align:center;max-width:200px}.bookingjs-form-button .error-text,.bookingjs-form-button .loading-text,.bookingjs-form-button .success-text{-webkit-transition:opacity .3s ease;transition:opacity .3s ease;position:absolute;top:13px;left:50%;-webkit-transform:translateX(-50%);transform:translateX(-50%);opacity:0}.bookingjs-form-button .inactive-text{white-space:nowrap;opacity:1}.bookingjs-form-button .loading-text svg{height:19px;width:19px;-webkit-animation:spin .6s infinite linear;animation:spin .6s infinite linear}.bookingjs-form-button .error-text svg{height:15px;width:15px;margin-top:2px}.bookingjs-form-button .success-text svg{height:15px;margin-top:2px;-webkit-transform:scale(0);transform:scale(0);-webkit-transition:-webkit-transform .6s ease;transition:-webkit-transform .6s ease;transition:transform .6s ease;transition:transform .6s ease,-webkit-transform .6s ease}.bookingjs-form-button:focus,.bookingjs-form-button:hover{background-color:#3f7fce}.bookingjs-form-button.button-shake{-webkit-animation:shake .5s 1 ease;animation:shake .5s 1 ease}.bookingjs-form.loading .bookingjs-form-button,.bookingjs-form.loading .bookingjs-form-button:hover{max-width:80px;background-color:#b1b1b1;cursor:not-allowed}.bookingjs-form.loading .bookingjs-form-button .inactive-text,.bookingjs-form.loading .bookingjs-form-button:hover .inactive-text{opacity:0}.bookingjs-form.loading .bookingjs-form-button .loading-text,.bookingjs-form.loading .bookingjs-form-button:hover .loading-text{opacity:1}.bookingjs-form.error .bookingjs-form-button,.bookingjs-form.error .bookingjs-form-button:hover{max-width:80px;background-color:#d83b46;cursor:not-allowed}.bookingjs-form.error .bookingjs-form-button .inactive-text,.bookingjs-form.error .bookingjs-form-button:hover .inactive-text{opacity:0}.bookingjs-form.error .bookingjs-form-button .error-text,.bookingjs-form.error .bookingjs-form-button:hover .error-text{opacity:1}.bookingjs-form.success .bookingjs-form-button,.bookingjs-form.success .bookingjs-form-button:hover{max-width:80px;background-color:#5baf56;cursor:not-allowed}.bookingjs-form.success .bookingjs-form-button .inactive-text,.bookingjs-form.success .bookingjs-form-button:hover .inactive-text{opacity:0}.bookingjs-form.success .bookingjs-form-button .success-text,.bookingjs-form.success .bookingjs-form-button:hover .success-text{opacity:1}.bookingjs-form.success .bookingjs-form-button .success-text svg,.bookingjs-form.success .bookingjs-form-button:hover .success-text svg{-webkit-transform:scale(1);transform:scale(1)}.bookingjs-poweredby{position:absolute;bottom:0;left:0;right:0;text-align:center;padding:7px 10px}.bookingjs-poweredby a{-webkit-transition:color .2s ease;transition:color .2s ease;color:#aeaeae;text-decoration:none}.bookingjs-poweredby a svg path{-webkit-transition:fill .2s ease;transition:fill .2s ease;fill:#aeaeae}.bookingjs-poweredby a:hover{color:#333}.bookingjs-poweredby a:hover svg path{fill:#333}.bookingjs-timekitlogo{width:15px;height:15px;margin-right:5px;vertical-align:sub}", ""]);
 	
 	// exports
 
 
 /***/ },
-/* 44 */
+/* 43 */
 /***/ function(module, exports) {
 
 	module.exports = "<svg class=\"bookingjs-timezoneicon\" viewBox=\"0 0 98 98\" version=\"1.1\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" xmlns:sketch=\"http://www.bohemiancoding.com/sketch/ns\"><title>Shape</title><desc>Created with Sketch.</desc><defs></defs><g id=\"Page-1\" stroke=\"none\" stroke-width=\"1\" fill=\"none\" fill-rule=\"evenodd\" sketch:type=\"MSPage\"><g id=\"timezone-icon\" sketch:type=\"MSLayerGroup\" fill=\"#AEAEAE\"><path d=\"M37.656,1.387 L39.381,2.516 L46.176,3.475 L49.313,2.778 L55.186,3.495 L56.364,5.065 L52.274,4.52 L48.092,6.262 L49.293,9.385 L53.613,11.348 L54.189,7.395 L58.285,7.133 L64.121,12.707 L65.775,14.887 L66.56,16.28 L62.029,18.067 L55.185,21.169 L54.624,24.206 L50.095,28.476 L50.271,32.572 L48.9,32.559 L48.353,29.086 L45.757,28.238 L38.294,28.631 L35.286,34.137 L37.901,37.274 L42.221,34.917 L42.516,38.755 L44.172,40.062 L47.131,43.46 L46.985,47.751 L52.448,49.034 L56.454,46.159 L58.284,46.768 L65.003,49.45 L74.433,52.985 L76.396,57.698 L83.111,60.968 L84.644,66.732 L80.062,71.857 L74.66,77.519 L68.933,80.482 L63.04,84.408 L55.185,89.515 L50.835,93.941 L49.292,92.263 L52.782,83.419 L53.663,73.167 L46.15,66.34 L46.199,60.596 L48.164,58.239 L50.471,51.415 L45.809,48.811 L42.664,43.706 L37.75,41.817 L30.047,37.667 L26.904,29.024 L25.334,33.344 L22.977,26.276 L23.762,15.671 L27.69,12.136 L26.512,9.779 L29.26,5.459 L23.905,6.99 C9.611,15.545 0.01,31.135 0.01,49.006 C0.01,76.062 21.945,98 49.006,98 C76.062,98 98,76.062 98,49.006 C98,21.947 76.062,0.012 49.006,0.012 C45.092,0.012 41.305,0.52 37.656,1.387 Z\" id=\"Shape\" sketch:type=\"MSShapeGroup\"></path></g></g></svg>"
 
 /***/ },
-/* 45 */
+/* 44 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var H = __webpack_require__(46);
-	module.exports = function() { var T = new H.Template({code: function (c,p,i) { var t=this;t.b(i=i||"");t.b("<div class=\"bookingjs-timezonehelper\">");t.b("\n");t.b("\n" + i);t.b("  ");t.b(t.t(t.f("timezoneIcon",c,p,0)));t.b("\n");t.b("\n" + i);if(t.s(t.f("loading",c,p,1),c,p,0,79,117,"{{ }}")){t.rs(c,p,function(c,p,t){t.b("    <span>");t.b(t.v(t.f("loadingText",c,p,0)));t.b("</span>");t.b("\n" + i);});c.pop();}t.b("\n" + i);if(!t.s(t.f("loading",c,p,1),c,p,1,0,0,"")){if(t.s(t.f("timezoneDifference",c,p,1),c,p,0,179,227,"{{ }}")){t.rs(c,p,function(c,p,t){t.b("      <span>");t.b(t.v(t.f("timezoneDifferent",c,p,0)));t.b("</span>");t.b("\n" + i);});c.pop();}t.b("\n" + i);if(!t.s(t.f("timezoneDifference",c,p,1),c,p,1,0,0,"")){t.b("      <span>");t.b(t.v(t.f("timezoneSame",c,p,0)));t.b("</span>");t.b("\n" + i);};};t.b("\n" + i);t.b("</div>");t.b("\n");return t.fl(); },partials: {}, subs: {  }}, "<div class=\"bookingjs-timezonehelper\">\n\n  {{& timezoneIcon }}\n\n  {{# loading }}\n    <span>{{ loadingText }}</span>\n  {{/ loading }}\n\n  {{^ loading }}\n    {{# timezoneDifference }}\n      <span>{{ timezoneDifferent }}</span>\n    {{/ timezoneDifference }}\n\n    {{^ timezoneDifference }}\n      <span>{{ timezoneSame }}</span>\n    {{/ timezoneDifference }}\n  {{/ loading }}\n\n</div>\n", H);return T; }();
+	var H = __webpack_require__(45);
+	module.exports = function() { var T = new H.Template({code: function (c,p,i) { var t=this;t.b(i=i||"");t.b("<div class=\"bookingjs-timezonehelper\">\r");t.b("\n" + i);t.b("\r");t.b("\n" + i);t.b("  ");t.b(t.t(t.f("timezoneIcon",c,p,0)));t.b("\r");t.b("\n" + i);t.b("\r");t.b("\n" + i);if(t.s(t.f("loading",c,p,1),c,p,0,83,123,"{{ }}")){t.rs(c,p,function(c,p,t){t.b("    <span>");t.b(t.v(t.f("loadingText",c,p,0)));t.b("</span>\r");t.b("\n" + i);});c.pop();}t.b("\r");t.b("\n" + i);if(!t.s(t.f("loading",c,p,1),c,p,1,0,0,"")){if(t.s(t.f("timezoneDifference",c,p,1),c,p,0,188,238,"{{ }}")){t.rs(c,p,function(c,p,t){t.b("      <span>");t.b(t.v(t.f("timezoneDifferent",c,p,0)));t.b("</span>\r");t.b("\n" + i);});c.pop();}t.b("\r");t.b("\n" + i);if(!t.s(t.f("timezoneDifference",c,p,1),c,p,1,0,0,"")){t.b("      <span>");t.b(t.v(t.f("timezoneSame",c,p,0)));t.b("</span>\r");t.b("\n" + i);};};t.b("\r");t.b("\n" + i);t.b("</div>\r");t.b("\n");return t.fl(); },partials: {}, subs: {  }}, "<div class=\"bookingjs-timezonehelper\">\r\n\r\n  {{& timezoneIcon }}\r\n\r\n  {{# loading }}\r\n    <span>{{ loadingText }}</span>\r\n  {{/ loading }}\r\n\r\n  {{^ loading }}\r\n    {{# timezoneDifference }}\r\n      <span>{{ timezoneDifferent }}</span>\r\n    {{/ timezoneDifference }}\r\n\r\n    {{^ timezoneDifference }}\r\n      <span>{{ timezoneSame }}</span>\r\n    {{/ timezoneDifference }}\r\n  {{/ loading }}\r\n\r\n</div>\r\n", H);return T; }();
 
 /***/ },
-/* 46 */
+/* 45 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/*
@@ -23011,14 +23037,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	// This file is for use with Node.js. See dist/ for browser files.
 	
-	var Hogan = __webpack_require__(47);
-	Hogan.Template = __webpack_require__(48).Template;
+	var Hogan = __webpack_require__(46);
+	Hogan.Template = __webpack_require__(47).Template;
 	Hogan.template = Hogan.Template;
 	module.exports = Hogan;
 
 
 /***/ },
-/* 47 */
+/* 46 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/*
@@ -23447,7 +23473,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 48 */
+/* 47 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/*
@@ -23794,66 +23820,66 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
+/* 48 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var H = __webpack_require__(45);
+	module.exports = function() { var T = new H.Template({code: function (c,p,i) { var t=this;t.b(i=i||"");t.b("<div class=\"bookingjs-avatar\">\r");t.b("\n" + i);t.b("  <img src=\"");t.b(t.t(t.f("image",c,p,0)));t.b("\" />\r");t.b("\n" + i);t.b("</div>\r");t.b("\n");return t.fl(); },partials: {}, subs: {  }}, "<div class=\"bookingjs-avatar\">\r\n  <img src=\"{{& image }}\" />\r\n</div>\r\n", H);return T; }();
+
+/***/ },
 /* 49 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var H = __webpack_require__(46);
-	module.exports = function() { var T = new H.Template({code: function (c,p,i) { var t=this;t.b(i=i||"");t.b("<div class=\"bookingjs-avatar\">");t.b("\n" + i);t.b("  <img src=\"");t.b(t.t(t.f("image",c,p,0)));t.b("\" />");t.b("\n" + i);t.b("</div>");t.b("\n");return t.fl(); },partials: {}, subs: {  }}, "<div class=\"bookingjs-avatar\">\n  <img src=\"{{& image }}\" />\n</div>\n", H);return T; }();
+	var H = __webpack_require__(45);
+	module.exports = function() { var T = new H.Template({code: function (c,p,i) { var t=this;t.b(i=i||"");t.b("<div class=\"bookingjs-displayname\">\r");t.b("\n" + i);t.b("  <span>");t.b(t.v(t.f("name",c,p,0)));t.b("</span>\r");t.b("\n" + i);t.b("</div>\r");t.b("\n");return t.fl(); },partials: {}, subs: {  }}, "<div class=\"bookingjs-displayname\">\r\n  <span>{{ name }}</span>\r\n</div>\r\n", H);return T; }();
 
 /***/ },
 /* 50 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var H = __webpack_require__(46);
-	module.exports = function() { var T = new H.Template({code: function (c,p,i) { var t=this;t.b(i=i||"");t.b("<div class=\"bookingjs-displayname\">");t.b("\n" + i);t.b("  <span>");t.b(t.v(t.f("name",c,p,0)));t.b("</span>");t.b("\n" + i);t.b("</div>");t.b("\n");return t.fl(); },partials: {}, subs: {  }}, "<div class=\"bookingjs-displayname\">\n  <span>{{ name }}</span>\n</div>\n", H);return T; }();
+	var H = __webpack_require__(45);
+	module.exports = function() { var T = new H.Template({code: function (c,p,i) { var t=this;t.b(i=i||"");t.b("\r");t.b("\n" + i);t.b("<input\r");t.b("\n" + i);t.b("  class=\"bookingjs-form-input input-name\"\r");t.b("\n" + i);t.b("  type=\"text\"\r");t.b("\n" + i);t.b("  name=\"name\"\r");t.b("\n" + i);t.b("  placeholder=\"");t.b(t.v(t.d("fields.name.placeholder",c,p,0)));t.b("\"\r");t.b("\n" + i);t.b("  ");if(t.s(t.d("fields.name.prefilled",c,p,1),c,p,0,160,197,"{{ }}")){t.rs(c,p,function(c,p,t){t.b(" value=\"");t.b(t.v(t.d("fields.name.prefilled",c,p,0)));t.b("\" ");});c.pop();}t.b("\r");t.b("\n" + i);t.b("  ");if(t.s(t.d("fields.name.locked",c,p,1),c,p,0,254,264,"{{ }}")){t.rs(c,p,function(c,p,t){t.b(" readonly ");});c.pop();}t.b("\r");t.b("\n" + i);t.b("  required\r");t.b("\n" + i);t.b("/>\r");t.b("\n" + i);t.b("\r");t.b("\n" + i);t.b("<input\r");t.b("\n" + i);t.b("  class=\"bookingjs-form-input input-email\"\r");t.b("\n" + i);t.b("  type=\"email\"\r");t.b("\n" + i);t.b("  name=\"email\"\r");t.b("\n" + i);t.b("  placeholder=\"");t.b(t.v(t.d("fields.email.placeholder",c,p,0)));t.b("\"\r");t.b("\n" + i);t.b("  ");if(t.s(t.d("fields.email.prefilled",c,p,1),c,p,0,472,510,"{{ }}")){t.rs(c,p,function(c,p,t){t.b(" value=\"");t.b(t.v(t.d("fields.email.prefilled",c,p,0)));t.b("\" ");});c.pop();}t.b("\r");t.b("\n" + i);t.b("  ");if(t.s(t.d("fields.email.locked",c,p,1),c,p,0,569,579,"{{ }}")){t.rs(c,p,function(c,p,t){t.b(" readonly ");});c.pop();}t.b("\r");t.b("\n" + i);t.b("  required\r");t.b("\n" + i);t.b("/>\r");t.b("\n" + i);t.b("\r");t.b("\n" + i);if(t.s(t.d("fields.phone.enabled",c,p,1),c,p,0,652,1042,"{{ }}")){t.rs(c,p,function(c,p,t){t.b("  <input\r");t.b("\n" + i);t.b("    class=\"bookingjs-form-input input-phone\"\r");t.b("\n" + i);t.b("    type=\"tel\"\r");t.b("\n" + i);t.b("    name=\"phone\"\r");t.b("\n" + i);t.b("    placeholder=\"");t.b(t.v(t.d("fields.phone.placeholder",c,p,0)));t.b("\"\r");t.b("\n" + i);t.b("    ");if(t.s(t.d("fields.phone.prefilled",c,p,1),c,p,0,827,865,"{{ }}")){t.rs(c,p,function(c,p,t){t.b(" value=\"");t.b(t.v(t.d("fields.phone.prefilled",c,p,0)));t.b("\" ");});c.pop();}t.b("\r");t.b("\n" + i);t.b("    ");if(t.s(t.d("fields.phone.required",c,p,1),c,p,0,928,938,"{{ }}")){t.rs(c,p,function(c,p,t){t.b(" required ");});c.pop();}t.b("\r");t.b("\n" + i);t.b("    ");if(t.s(t.d("fields.phone.locked",c,p,1),c,p,0,998,1008,"{{ }}")){t.rs(c,p,function(c,p,t){t.b(" readonly ");});c.pop();}t.b("\r");t.b("\n" + i);t.b("  />\r");t.b("\n" + i);});c.pop();}t.b("\r");t.b("\n" + i);if(t.s(t.d("fields.voip.enabled",c,p,1),c,p,0,1099,1480,"{{ }}")){t.rs(c,p,function(c,p,t){t.b("  <input\r");t.b("\n" + i);t.b("    class=\"bookingjs-form-input input-voip\"\r");t.b("\n" + i);t.b("    type=\"text\"\r");t.b("\n" + i);t.b("    name=\"voip\"\r");t.b("\n" + i);t.b("    placeholder=\"");t.b(t.v(t.d("fields.voip.placeholder",c,p,0)));t.b("\"\r");t.b("\n" + i);t.b("    ");if(t.s(t.d("fields.voip.prefilled",c,p,1),c,p,0,1271,1308,"{{ }}")){t.rs(c,p,function(c,p,t){t.b(" value=\"");t.b(t.v(t.d("fields.voip.prefilled",c,p,0)));t.b("\" ");});c.pop();}t.b("\r");t.b("\n" + i);t.b("    ");if(t.s(t.d("fields.voip.required",c,p,1),c,p,0,1369,1379,"{{ }}")){t.rs(c,p,function(c,p,t){t.b(" required ");});c.pop();}t.b("\r");t.b("\n" + i);t.b("    ");if(t.s(t.d("fields.voip.locked",c,p,1),c,p,0,1437,1447,"{{ }}")){t.rs(c,p,function(c,p,t){t.b(" readonly ");});c.pop();}t.b("\r");t.b("\n" + i);t.b("  />\r");t.b("\n" + i);});c.pop();}t.b("\r");t.b("\n" + i);if(t.s(t.d("fields.location.enabled",c,p,1),c,p,0,1540,1961,"{{ }}")){t.rs(c,p,function(c,p,t){t.b("  <input\r");t.b("\n" + i);t.b("    class=\"bookingjs-form-input input-location\"\r");t.b("\n" + i);t.b("    type=\"text\"\r");t.b("\n" + i);t.b("    name=\"location\"\r");t.b("\n" + i);t.b("    placeholder=\"");t.b(t.v(t.d("fields.location.placeholder",c,p,0)));t.b("\"\r");t.b("\n" + i);t.b("    ");if(t.s(t.d("fields.location.prefilled",c,p,1),c,p,0,1728,1769,"{{ }}")){t.rs(c,p,function(c,p,t){t.b(" value=\"");t.b(t.v(t.d("fields.location.prefilled",c,p,0)));t.b("\" ");});c.pop();}t.b("\r");t.b("\n" + i);t.b("    ");if(t.s(t.d("fields.location.required",c,p,1),c,p,0,1838,1848,"{{ }}")){t.rs(c,p,function(c,p,t){t.b(" required ");});c.pop();}t.b("\r");t.b("\n" + i);t.b("    ");if(t.s(t.d("fields.location.locked",c,p,1),c,p,0,1914,1924,"{{ }}")){t.rs(c,p,function(c,p,t){t.b(" readonly ");});c.pop();}t.b("\r");t.b("\n" + i);t.b("  />\r");t.b("\n" + i);});c.pop();}t.b("\r");t.b("\n" + i);if(t.s(t.d("fields.comment.enabled",c,p,1),c,p,0,2024,2425,"{{ }}")){t.rs(c,p,function(c,p,t){t.b("  <textarea\r");t.b("\n" + i);t.b("    class=\"bookingjs-form-input input-comment\"\r");t.b("\n" + i);t.b("    rows=\"3\"\r");t.b("\n" + i);t.b("    name=\"comment\"\r");t.b("\n" + i);t.b("    placeholder=\"");t.b(t.v(t.d("fields.comment.placeholder",c,p,0)));t.b("\"\r");t.b("\n" + i);t.b("    ");if(t.s(t.d("fields.comment.required",c,p,1),c,p,0,2207,2217,"{{ }}")){t.rs(c,p,function(c,p,t){t.b(" required ");});c.pop();}t.b("\r");t.b("\n" + i);t.b("    ");if(t.s(t.d("fields.comment.locked",c,p,1),c,p,0,2281,2291,"{{ }}")){t.rs(c,p,function(c,p,t){t.b(" readonly ");});c.pop();}t.b(">");if(t.s(t.d("fields.comment.prefilled",c,p,1),c,p,0,2351,2381,"{{ }}")){t.rs(c,p,function(c,p,t){t.b(t.v(t.d("fields.comment.prefilled",c,p,0)));});c.pop();}t.b("</textarea>\r");t.b("\n" + i);});c.pop();}return t.fl(); },partials: {}, subs: {  }}, "\r\n<input\r\n  class=\"bookingjs-form-input input-name\"\r\n  type=\"text\"\r\n  name=\"name\"\r\n  placeholder=\"{{ fields.name.placeholder }}\"\r\n  {{# fields.name.prefilled }} value=\"{{ fields.name.prefilled }}\" {{/ fields.name.prefilled }}\r\n  {{# fields.name.locked }} readonly {{/ fields.name.locked }}\r\n  required\r\n/>\r\n\r\n<input\r\n  class=\"bookingjs-form-input input-email\"\r\n  type=\"email\"\r\n  name=\"email\"\r\n  placeholder=\"{{ fields.email.placeholder }}\"\r\n  {{# fields.email.prefilled }} value=\"{{ fields.email.prefilled }}\" {{/ fields.email.prefilled }}\r\n  {{# fields.email.locked }} readonly {{/ fields.email.locked }}\r\n  required\r\n/>\r\n\r\n{{# fields.phone.enabled }}\r\n  <input\r\n    class=\"bookingjs-form-input input-phone\"\r\n    type=\"tel\"\r\n    name=\"phone\"\r\n    placeholder=\"{{ fields.phone.placeholder }}\"\r\n    {{# fields.phone.prefilled }} value=\"{{ fields.phone.prefilled }}\" {{/ fields.phone.prefilled }}\r\n    {{# fields.phone.required }} required {{/ fields.phone.required }}\r\n    {{# fields.phone.locked }} readonly {{/ fields.phone.locked }}\r\n  />\r\n{{/ fields.phone.enabled }}\r\n\r\n{{# fields.voip.enabled }}\r\n  <input\r\n    class=\"bookingjs-form-input input-voip\"\r\n    type=\"text\"\r\n    name=\"voip\"\r\n    placeholder=\"{{ fields.voip.placeholder }}\"\r\n    {{# fields.voip.prefilled }} value=\"{{ fields.voip.prefilled }}\" {{/ fields.voip.prefilled }}\r\n    {{# fields.voip.required }} required {{/ fields.voip.required }}\r\n    {{# fields.voip.locked }} readonly {{/ fields.voip.locked }}\r\n  />\r\n{{/ fields.voip.enabled }}\r\n\r\n{{# fields.location.enabled }}\r\n  <input\r\n    class=\"bookingjs-form-input input-location\"\r\n    type=\"text\"\r\n    name=\"location\"\r\n    placeholder=\"{{ fields.location.placeholder }}\"\r\n    {{# fields.location.prefilled }} value=\"{{ fields.location.prefilled }}\" {{/ fields.location.prefilled }}\r\n    {{# fields.location.required }} required {{/ fields.location.required }}\r\n    {{# fields.location.locked }} readonly {{/ fields.location.locked }}\r\n  />\r\n{{/ fields.location.enabled }}\r\n\r\n{{# fields.comment.enabled }}\r\n  <textarea\r\n    class=\"bookingjs-form-input input-comment\"\r\n    rows=\"3\"\r\n    name=\"comment\"\r\n    placeholder=\"{{ fields.comment.placeholder }}\"\r\n    {{# fields.comment.required }} required {{/ fields.comment.required }}\r\n    {{# fields.comment.locked }} readonly {{/ fields.comment.locked }}>{{# fields.comment.prefilled }}{{ fields.comment.prefilled }}{{/ fields.comment.prefilled }}</textarea>\r\n{{/ fields.comment.enabled }}\r\n", H);return T; }();
 
 /***/ },
 /* 51 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var H = __webpack_require__(46);
-	module.exports = function() { var T = new H.Template({code: function (c,p,i) { var t=this;t.b(i=i||"");t.b("\n" + i);t.b("<input");t.b("\n" + i);t.b("  class=\"bookingjs-form-input input-name\"");t.b("\n" + i);t.b("  type=\"text\"");t.b("\n" + i);t.b("  name=\"name\"");t.b("\n" + i);t.b("  placeholder=\"");t.b(t.v(t.d("fields.name.placeholder",c,p,0)));t.b("\"");t.b("\n" + i);t.b("  ");if(t.s(t.d("fields.name.prefilled",c,p,1),c,p,0,154,191,"{{ }}")){t.rs(c,p,function(c,p,t){t.b(" value=\"");t.b(t.v(t.d("fields.name.prefilled",c,p,0)));t.b("\" ");});c.pop();}t.b("\n" + i);t.b("  ");if(t.s(t.d("fields.name.locked",c,p,1),c,p,0,247,257,"{{ }}")){t.rs(c,p,function(c,p,t){t.b(" readonly ");});c.pop();}t.b("\n" + i);t.b("  required");t.b("\n" + i);t.b("/>");t.b("\n");t.b("\n" + i);t.b("<input");t.b("\n" + i);t.b("  class=\"bookingjs-form-input input-email\"");t.b("\n" + i);t.b("  type=\"email\"");t.b("\n" + i);t.b("  name=\"email\"");t.b("\n" + i);t.b("  placeholder=\"");t.b(t.v(t.d("fields.email.placeholder",c,p,0)));t.b("\"");t.b("\n" + i);t.b("  ");if(t.s(t.d("fields.email.prefilled",c,p,1),c,p,0,456,494,"{{ }}")){t.rs(c,p,function(c,p,t){t.b(" value=\"");t.b(t.v(t.d("fields.email.prefilled",c,p,0)));t.b("\" ");});c.pop();}t.b("\n" + i);t.b("  ");if(t.s(t.d("fields.email.locked",c,p,1),c,p,0,552,562,"{{ }}")){t.rs(c,p,function(c,p,t){t.b(" readonly ");});c.pop();}t.b("\n" + i);t.b("  required");t.b("\n" + i);t.b("/>");t.b("\n");t.b("\n" + i);if(t.s(t.d("fields.phone.enabled",c,p,1),c,p,0,631,1011,"{{ }}")){t.rs(c,p,function(c,p,t){t.b("  <input");t.b("\n" + i);t.b("    class=\"bookingjs-form-input input-phone\"");t.b("\n" + i);t.b("    type=\"tel\"");t.b("\n" + i);t.b("    name=\"phone\"");t.b("\n" + i);t.b("    placeholder=\"");t.b(t.v(t.d("fields.phone.placeholder",c,p,0)));t.b("\"");t.b("\n" + i);t.b("    ");if(t.s(t.d("fields.phone.prefilled",c,p,1),c,p,0,800,838,"{{ }}")){t.rs(c,p,function(c,p,t){t.b(" value=\"");t.b(t.v(t.d("fields.phone.prefilled",c,p,0)));t.b("\" ");});c.pop();}t.b("\n" + i);t.b("    ");if(t.s(t.d("fields.phone.required",c,p,1),c,p,0,900,910,"{{ }}")){t.rs(c,p,function(c,p,t){t.b(" required ");});c.pop();}t.b("\n" + i);t.b("    ");if(t.s(t.d("fields.phone.locked",c,p,1),c,p,0,969,979,"{{ }}")){t.rs(c,p,function(c,p,t){t.b(" readonly ");});c.pop();}t.b("\n" + i);t.b("  />");t.b("\n" + i);});c.pop();}t.b("\n" + i);if(t.s(t.d("fields.voip.enabled",c,p,1),c,p,0,1066,1437,"{{ }}")){t.rs(c,p,function(c,p,t){t.b("  <input");t.b("\n" + i);t.b("    class=\"bookingjs-form-input input-voip\"");t.b("\n" + i);t.b("    type=\"text\"");t.b("\n" + i);t.b("    name=\"voip\"");t.b("\n" + i);t.b("    placeholder=\"");t.b(t.v(t.d("fields.voip.placeholder",c,p,0)));t.b("\"");t.b("\n" + i);t.b("    ");if(t.s(t.d("fields.voip.prefilled",c,p,1),c,p,0,1232,1269,"{{ }}")){t.rs(c,p,function(c,p,t){t.b(" value=\"");t.b(t.v(t.d("fields.voip.prefilled",c,p,0)));t.b("\" ");});c.pop();}t.b("\n" + i);t.b("    ");if(t.s(t.d("fields.voip.required",c,p,1),c,p,0,1329,1339,"{{ }}")){t.rs(c,p,function(c,p,t){t.b(" required ");});c.pop();}t.b("\n" + i);t.b("    ");if(t.s(t.d("fields.voip.locked",c,p,1),c,p,0,1396,1406,"{{ }}")){t.rs(c,p,function(c,p,t){t.b(" readonly ");});c.pop();}t.b("\n" + i);t.b("  />");t.b("\n" + i);});c.pop();}t.b("\n" + i);if(t.s(t.d("fields.location.enabled",c,p,1),c,p,0,1495,1906,"{{ }}")){t.rs(c,p,function(c,p,t){t.b("  <input");t.b("\n" + i);t.b("    class=\"bookingjs-form-input input-location\"");t.b("\n" + i);t.b("    type=\"text\"");t.b("\n" + i);t.b("    name=\"location\"");t.b("\n" + i);t.b("    placeholder=\"");t.b(t.v(t.d("fields.location.placeholder",c,p,0)));t.b("\"");t.b("\n" + i);t.b("    ");if(t.s(t.d("fields.location.prefilled",c,p,1),c,p,0,1677,1718,"{{ }}")){t.rs(c,p,function(c,p,t){t.b(" value=\"");t.b(t.v(t.d("fields.location.prefilled",c,p,0)));t.b("\" ");});c.pop();}t.b("\n" + i);t.b("    ");if(t.s(t.d("fields.location.required",c,p,1),c,p,0,1786,1796,"{{ }}")){t.rs(c,p,function(c,p,t){t.b(" required ");});c.pop();}t.b("\n" + i);t.b("    ");if(t.s(t.d("fields.location.locked",c,p,1),c,p,0,1861,1871,"{{ }}")){t.rs(c,p,function(c,p,t){t.b(" readonly ");});c.pop();}t.b("\n" + i);t.b("  />");t.b("\n" + i);});c.pop();}t.b("\n" + i);if(t.s(t.d("fields.comment.enabled",c,p,1),c,p,0,1967,2360,"{{ }}")){t.rs(c,p,function(c,p,t){t.b("  <textarea");t.b("\n" + i);t.b("    class=\"bookingjs-form-input input-comment\"");t.b("\n" + i);t.b("    rows=\"3\"");t.b("\n" + i);t.b("    name=\"comment\"");t.b("\n" + i);t.b("    placeholder=\"");t.b(t.v(t.d("fields.comment.placeholder",c,p,0)));t.b("\"");t.b("\n" + i);t.b("    ");if(t.s(t.d("fields.comment.required",c,p,1),c,p,0,2144,2154,"{{ }}")){t.rs(c,p,function(c,p,t){t.b(" required ");});c.pop();}t.b("\n" + i);t.b("    ");if(t.s(t.d("fields.comment.locked",c,p,1),c,p,0,2217,2227,"{{ }}")){t.rs(c,p,function(c,p,t){t.b(" readonly ");});c.pop();}t.b(">");if(t.s(t.d("fields.comment.prefilled",c,p,1),c,p,0,2287,2317,"{{ }}")){t.rs(c,p,function(c,p,t){t.b(t.v(t.d("fields.comment.prefilled",c,p,0)));});c.pop();}t.b("</textarea>");t.b("\n" + i);});c.pop();}return t.fl(); },partials: {}, subs: {  }}, "\n<input\n  class=\"bookingjs-form-input input-name\"\n  type=\"text\"\n  name=\"name\"\n  placeholder=\"{{ fields.name.placeholder }}\"\n  {{# fields.name.prefilled }} value=\"{{ fields.name.prefilled }}\" {{/ fields.name.prefilled }}\n  {{# fields.name.locked }} readonly {{/ fields.name.locked }}\n  required\n/>\n\n<input\n  class=\"bookingjs-form-input input-email\"\n  type=\"email\"\n  name=\"email\"\n  placeholder=\"{{ fields.email.placeholder }}\"\n  {{# fields.email.prefilled }} value=\"{{ fields.email.prefilled }}\" {{/ fields.email.prefilled }}\n  {{# fields.email.locked }} readonly {{/ fields.email.locked }}\n  required\n/>\n\n{{# fields.phone.enabled }}\n  <input\n    class=\"bookingjs-form-input input-phone\"\n    type=\"tel\"\n    name=\"phone\"\n    placeholder=\"{{ fields.phone.placeholder }}\"\n    {{# fields.phone.prefilled }} value=\"{{ fields.phone.prefilled }}\" {{/ fields.phone.prefilled }}\n    {{# fields.phone.required }} required {{/ fields.phone.required }}\n    {{# fields.phone.locked }} readonly {{/ fields.phone.locked }}\n  />\n{{/ fields.phone.enabled }}\n\n{{# fields.voip.enabled }}\n  <input\n    class=\"bookingjs-form-input input-voip\"\n    type=\"text\"\n    name=\"voip\"\n    placeholder=\"{{ fields.voip.placeholder }}\"\n    {{# fields.voip.prefilled }} value=\"{{ fields.voip.prefilled }}\" {{/ fields.voip.prefilled }}\n    {{# fields.voip.required }} required {{/ fields.voip.required }}\n    {{# fields.voip.locked }} readonly {{/ fields.voip.locked }}\n  />\n{{/ fields.voip.enabled }}\n\n{{# fields.location.enabled }}\n  <input\n    class=\"bookingjs-form-input input-location\"\n    type=\"text\"\n    name=\"location\"\n    placeholder=\"{{ fields.location.placeholder }}\"\n    {{# fields.location.prefilled }} value=\"{{ fields.location.prefilled }}\" {{/ fields.location.prefilled }}\n    {{# fields.location.required }} required {{/ fields.location.required }}\n    {{# fields.location.locked }} readonly {{/ fields.location.locked }}\n  />\n{{/ fields.location.enabled }}\n\n{{# fields.comment.enabled }}\n  <textarea\n    class=\"bookingjs-form-input input-comment\"\n    rows=\"3\"\n    name=\"comment\"\n    placeholder=\"{{ fields.comment.placeholder }}\"\n    {{# fields.comment.required }} required {{/ fields.comment.required }}\n    {{# fields.comment.locked }} readonly {{/ fields.comment.locked }}>{{# fields.comment.prefilled }}{{ fields.comment.prefilled }}{{/ fields.comment.prefilled }}</textarea>\n{{/ fields.comment.enabled }}\n", H);return T; }();
+	var H = __webpack_require__(45);
+	module.exports = function() { var T = new H.Template({code: function (c,p,i) { var t=this;t.b(i=i||"");t.b("<div class=\"bookingjs-bookpage\">\r");t.b("\n" + i);t.b("  <a class=\"bookingjs-bookpage-close\" href=\"#\">");t.b(t.t(t.f("closeIcon",c,p,0)));t.b("</a>\r");t.b("\n" + i);t.b("  <h2 class=\"bookingjs-bookpage-date\">");t.b(t.v(t.f("chosenDate",c,p,0)));t.b("</h2>\r");t.b("\n" + i);t.b("  <h3 class=\"bookingjs-bookpage-time\">");t.b(t.v(t.f("chosenTime",c,p,0)));t.b("</h3>\r");t.b("\n" + i);t.b("  <form class=\"bookingjs-form\" action=\"#\">\r");t.b("\n" + i);t.b("    <div class=\"bookingjs-form-box\">\r");t.b("\n" + i);t.b("      <div class=\"bookingjs-form-success-message\">\r");t.b("\n" + i);t.b("        <div class=\"title\">");t.b(t.v(t.f("successMessageTitle",c,p,0)));t.b("</div>\r");t.b("\n" + i);t.b("        <div class=\"body\">");t.b(t.t(t.f("successMessageBody",c,p,0)));t.b("</div>\r");t.b("\n" + i);t.b("      </div>\r");t.b("\n" + i);t.b("      <div class=\"bookingjs-form-fields\">\r");t.b("\n" + i);t.b("        <input class=\"bookingjs-form-input hidden\" type=\"text\" name=\"start\" value=\"");t.b(t.v(t.f("start",c,p,0)));t.b("\" />\r");t.b("\n" + i);t.b("        <input class=\"bookingjs-form-input hidden\" type=\"text\" name=\"end\" value=\"");t.b(t.v(t.f("end",c,p,0)));t.b("\" />\r");t.b("\n" + i);t.b(t.rp("<formFields0",c,p,"        "));t.b("      </div>\r");t.b("\n" + i);t.b("    </div>\r");t.b("\n" + i);t.b("    <button class=\"bookingjs-form-button\" type=\"submit\">\r");t.b("\n" + i);t.b("      <span class=\"inactive-text\">");t.b(t.v(t.f("submitText",c,p,0)));t.b("</span>\r");t.b("\n" + i);t.b("      <span class=\"loading-text\">");t.b(t.t(t.f("loadingIcon",c,p,0)));t.b("</span>\r");t.b("\n" + i);t.b("      <span class=\"error-text\">");t.b(t.t(t.f("errorIcon",c,p,0)));t.b("</span>\r");t.b("\n" + i);t.b("      <span class=\"success-text\">");t.b(t.t(t.f("checkmarkIcon",c,p,0)));t.b("</span>\r");t.b("\n" + i);t.b("    </button>\r");t.b("\n" + i);t.b("  </form>\r");t.b("\n" + i);t.b("</div>\r");t.b("\n");return t.fl(); },partials: {"<formFields0":{name:"formFields", partials: {}, subs: {  }}}, subs: {  }}, "<div class=\"bookingjs-bookpage\">\r\n  <a class=\"bookingjs-bookpage-close\" href=\"#\">{{& closeIcon }}</a>\r\n  <h2 class=\"bookingjs-bookpage-date\">{{ chosenDate }}</h2>\r\n  <h3 class=\"bookingjs-bookpage-time\">{{ chosenTime }}</h3>\r\n  <form class=\"bookingjs-form\" action=\"#\">\r\n    <div class=\"bookingjs-form-box\">\r\n      <div class=\"bookingjs-form-success-message\">\r\n        <div class=\"title\">{{ successMessageTitle }}</div>\r\n        <div class=\"body\">{{& successMessageBody }}</div>\r\n      </div>\r\n      <div class=\"bookingjs-form-fields\">\r\n        <input class=\"bookingjs-form-input hidden\" type=\"text\" name=\"start\" value=\"{{ start }}\" />\r\n        <input class=\"bookingjs-form-input hidden\" type=\"text\" name=\"end\" value=\"{{ end }}\" />\r\n        {{> formFields }}\r\n      </div>\r\n    </div>\r\n    <button class=\"bookingjs-form-button\" type=\"submit\">\r\n      <span class=\"inactive-text\">{{ submitText }}</span>\r\n      <span class=\"loading-text\">{{& loadingIcon }}</span>\r\n      <span class=\"error-text\">{{& errorIcon }}</span>\r\n      <span class=\"success-text\">{{& checkmarkIcon }}</span>\r\n    </button>\r\n  </form>\r\n</div>\r\n", H);return T; }();
 
 /***/ },
 /* 52 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var H = __webpack_require__(46);
-	module.exports = function() { var T = new H.Template({code: function (c,p,i) { var t=this;t.b(i=i||"");t.b("<div class=\"bookingjs-bookpage\">");t.b("\n" + i);t.b("  <a class=\"bookingjs-bookpage-close\" href=\"#\">");t.b(t.t(t.f("closeIcon",c,p,0)));t.b("</a>");t.b("\n" + i);t.b("  <h2 class=\"bookingjs-bookpage-date\">");t.b(t.v(t.f("chosenDate",c,p,0)));t.b("</h2>");t.b("\n" + i);t.b("  <h3 class=\"bookingjs-bookpage-time\">");t.b(t.v(t.f("chosenTime",c,p,0)));t.b("</h3>");t.b("\n" + i);t.b("  <form class=\"bookingjs-form\" action=\"#\">");t.b("\n" + i);t.b("    <div class=\"bookingjs-form-box\">");t.b("\n" + i);t.b("      <div class=\"bookingjs-form-success-message\">");t.b("\n" + i);t.b("        <div class=\"title\">");t.b(t.v(t.f("successMessageTitle",c,p,0)));t.b("</div>");t.b("\n" + i);t.b("        <div class=\"body\">");t.b(t.t(t.f("successMessageBody",c,p,0)));t.b("</div>");t.b("\n" + i);t.b("      </div>");t.b("\n" + i);t.b("      <div class=\"bookingjs-form-fields\">");t.b("\n" + i);t.b("        <input class=\"bookingjs-form-input hidden\" type=\"text\" name=\"start\" value=\"");t.b(t.v(t.f("start",c,p,0)));t.b("\" />");t.b("\n" + i);t.b("        <input class=\"bookingjs-form-input hidden\" type=\"text\" name=\"end\" value=\"");t.b(t.v(t.f("end",c,p,0)));t.b("\" />");t.b("\n" + i);t.b(t.rp("<formFields0",c,p,"        "));t.b("      </div>");t.b("\n" + i);t.b("    </div>");t.b("\n" + i);t.b("    <button class=\"bookingjs-form-button\" type=\"submit\">");t.b("\n" + i);t.b("      <span class=\"inactive-text\">");t.b(t.v(t.f("submitText",c,p,0)));t.b("</span>");t.b("\n" + i);t.b("      <span class=\"loading-text\">");t.b(t.t(t.f("loadingIcon",c,p,0)));t.b("</span>");t.b("\n" + i);t.b("      <span class=\"error-text\">");t.b(t.t(t.f("errorIcon",c,p,0)));t.b("</span>");t.b("\n" + i);t.b("      <span class=\"success-text\">");t.b(t.t(t.f("checkmarkIcon",c,p,0)));t.b("</span>");t.b("\n" + i);t.b("    </button>");t.b("\n" + i);t.b("  </form>");t.b("\n" + i);t.b("</div>");t.b("\n");return t.fl(); },partials: {"<formFields0":{name:"formFields", partials: {}, subs: {  }}}, subs: {  }}, "<div class=\"bookingjs-bookpage\">\n  <a class=\"bookingjs-bookpage-close\" href=\"#\">{{& closeIcon }}</a>\n  <h2 class=\"bookingjs-bookpage-date\">{{ chosenDate }}</h2>\n  <h3 class=\"bookingjs-bookpage-time\">{{ chosenTime }}</h3>\n  <form class=\"bookingjs-form\" action=\"#\">\n    <div class=\"bookingjs-form-box\">\n      <div class=\"bookingjs-form-success-message\">\n        <div class=\"title\">{{ successMessageTitle }}</div>\n        <div class=\"body\">{{& successMessageBody }}</div>\n      </div>\n      <div class=\"bookingjs-form-fields\">\n        <input class=\"bookingjs-form-input hidden\" type=\"text\" name=\"start\" value=\"{{ start }}\" />\n        <input class=\"bookingjs-form-input hidden\" type=\"text\" name=\"end\" value=\"{{ end }}\" />\n        {{> formFields }}\n      </div>\n    </div>\n    <button class=\"bookingjs-form-button\" type=\"submit\">\n      <span class=\"inactive-text\">{{ submitText }}</span>\n      <span class=\"loading-text\">{{& loadingIcon }}</span>\n      <span class=\"error-text\">{{& errorIcon }}</span>\n      <span class=\"success-text\">{{& checkmarkIcon }}</span>\n    </button>\n  </form>\n</div>\n", H);return T; }();
-
-/***/ },
-/* 53 */
 /***/ function(module, exports) {
 
 	module.exports = "<svg class=\"bookingjs-closeicon\" viewBox=\"0 0 90 90\" version=\"1.1\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" xmlns:sketch=\"http://www.bohemiancoding.com/sketch/ns\"><title>close-icon</title><desc>Created with Sketch.</desc><defs></defs><g id=\"Page-1\" stroke=\"none\" stroke-width=\"1\" fill=\"none\" fill-rule=\"evenodd\" sketch:type=\"MSPage\"><g id=\"close-icon\" sketch:type=\"MSLayerGroup\" fill=\"#000000\"><path d=\"M58,45 L87.2,15.8 C90.9,12.1 90.9,6.3 87.3,2.7 C83.7,-0.9 77.8,-0.8 74.2,2.8 L45,32 L15.8,2.8 C12.1,-0.9 6.3,-0.9 2.7,2.7 C-0.9,6.3 -0.8,12.2 2.8,15.8 L32,45 L2.8,74.2 C-0.9,77.9 -0.9,83.7 2.7,87.3 C6.3,90.9 12.2,90.8 15.8,87.2 L45,58 L74.2,87.2 C77.9,90.9 83.7,90.9 87.3,87.3 C90.9,83.7 90.8,77.8 87.2,74.2 L58,45 L58,45 Z\" id=\"Shape\" sketch:type=\"MSShapeGroup\"></path></g></g></svg>"
 
 /***/ },
-/* 54 */
+/* 53 */
 /***/ function(module, exports) {
 
 	module.exports = "<svg viewBox=\"0 0 38 26\" x=\"0px\" y=\"0px\" version=\"1.1\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" xmlns:sketch=\"http://www.bohemiancoding.com/sketch/ns\"><path fill=\"#fff\" d=\"M4.59255916,9.14153015 L4.59255916,9.14153015 L4.59255917,9.14153016 C3.61060488,8.15335155 2.0152224,8.15314806 1.03260582,9.1419932 L0.737322592,9.43914816 C-0.245558943,10.4282599 -0.245836003,12.0327396 0.736862454,13.0216671 L12.8967481,25.2586313 C13.4826504,25.8482474 14.3060779,26.1023412 15.1093609,25.9623831 L15.1946218,25.9520176 C15.7962843,25.9101633 16.3621851,25.6553951 16.7974015,25.21742 L37.2642739,4.6208133 C38.2456495,3.63321696 38.2453889,2.02851586 37.2626092,1.03950653 L36.967326,0.742351578 C35.9843771,-0.246827998 34.390543,-0.247513927 33.4085772,0.740676315 L15.4197831,18.8434968 L14.826599,19.4404409 L14.2334149,18.8434968 L4.59255916,9.14153015 Z\" id=\"Path\"></path></svg>"
 
 /***/ },
-/* 55 */
+/* 54 */
 /***/ function(module, exports) {
 
 	module.exports = "<svg version=\"1.1\" id=\"loader-1\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" x=\"0px\" y=\"0px\" viewBox=\"0 0 38 38\" xml:space=\"preserve\"><path fill=\"#fff\" d=\"M38,19 C38,8.50658975 29.4934102,0 19,0 C8.50658975,0 0,8.50658975 0,19 L5,19 C5,11.2680135 11.2680135,5 19,5 C26.7319865,5 33,11.2680135 33,19 L38,19 Z\" id=\"Oval-1\" sketch:type=\"MSShapeGroup\"></path></path></svg>"
 
 /***/ },
-/* 56 */
+/* 55 */
 /***/ function(module, exports) {
 
 	module.exports = "<svg class=\"bookingjs-closeicon\" viewBox=\"0 0 90 90\" version=\"1.1\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" xmlns:sketch=\"http://www.bohemiancoding.com/sketch/ns\"><title>error-icon</title><desc>Created with Sketch.</desc><defs></defs><g id=\"Page-1\" stroke=\"none\" stroke-width=\"1\" fill=\"none\" fill-rule=\"evenodd\" sketch:type=\"MSPage\"><g id=\"error-icon\" sketch:type=\"MSLayerGroup\" fill=\"#FFFFFF\"><path d=\"M58,45 L87.2,15.8 C90.9,12.1 90.9,6.3 87.3,2.7 C83.7,-0.9 77.8,-0.8 74.2,2.8 L45,32 L15.8,2.8 C12.1,-0.9 6.3,-0.9 2.7,2.7 C-0.9,6.3 -0.8,12.2 2.8,15.8 L32,45 L2.8,74.2 C-0.9,77.9 -0.9,83.7 2.7,87.3 C6.3,90.9 12.2,90.8 15.8,87.2 L45,58 L74.2,87.2 C77.9,90.9 83.7,90.9 87.3,87.3 C90.9,83.7 90.8,77.8 87.2,74.2 L58,45 L58,45 Z\" id=\"Shape\" sketch:type=\"MSShapeGroup\"></path></g></g></svg>"
 
 /***/ },
-/* 57 */
+/* 56 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var H = __webpack_require__(46);
-	module.exports = function() { var T = new H.Template({code: function (c,p,i) { var t=this;t.b(i=i||"");t.b("<div class=\"bookingjs-poweredby\">");t.b("\n" + i);t.b("  <a href=\"http://timekit.io?utm_medium=link&utm_source=");t.b(t.v(t.f("campaignSource",c,p,0)));t.b("&utm_campaign=");t.b(t.v(t.f("campaignName",c,p,0)));t.b("&utm_content=powered-by\" target=\"_blank\">");t.b("\n" + i);t.b("    ");t.b(t.t(t.f("timekitLogo",c,p,0)));t.b("\n" + i);t.b("    <span>Powered by Timekit</span>");t.b("\n" + i);t.b("  </a>");t.b("\n" + i);t.b("</div>");t.b("\n");return t.fl(); },partials: {}, subs: {  }}, "<div class=\"bookingjs-poweredby\">\n  <a href=\"http://timekit.io?utm_medium=link&utm_source={{ campaignSource }}&utm_campaign={{ campaignName }}&utm_content=powered-by\" target=\"_blank\">\n    {{& timekitLogo }}\n    <span>Powered by Timekit</span>\n  </a>\n</div>\n", H);return T; }();
+	var H = __webpack_require__(45);
+	module.exports = function() { var T = new H.Template({code: function (c,p,i) { var t=this;t.b(i=i||"");t.b("<div class=\"bookingjs-poweredby\">\r");t.b("\n" + i);t.b("  <a href=\"http://timekit.io?utm_medium=link&utm_source=");t.b(t.v(t.f("campaignSource",c,p,0)));t.b("&utm_campaign=");t.b(t.v(t.f("campaignName",c,p,0)));t.b("&utm_content=powered-by\" target=\"_blank\">\r");t.b("\n" + i);t.b("    ");t.b(t.t(t.f("timekitLogo",c,p,0)));t.b("\r");t.b("\n" + i);t.b("    <span>Powered by Timekit</span>\r");t.b("\n" + i);t.b("  </a>\r");t.b("\n" + i);t.b("</div>\r");t.b("\n");return t.fl(); },partials: {}, subs: {  }}, "<div class=\"bookingjs-poweredby\">\r\n  <a href=\"http://timekit.io?utm_medium=link&utm_source={{ campaignSource }}&utm_campaign={{ campaignName }}&utm_content=powered-by\" target=\"_blank\">\r\n    {{& timekitLogo }}\r\n    <span>Powered by Timekit</span>\r\n  </a>\r\n</div>\r\n", H);return T; }();
 
 /***/ },
-/* 58 */
+/* 57 */
 /***/ function(module, exports) {
 
 	module.exports = "<svg class=\"bookingjs-timekitlogo\" viewBox=\"0 0 495 594\" version=\"1.1\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" xmlns:sketch=\"http://www.bohemiancoding.com/sketch/ns\"><title>Full vector path</title><desc>Created with Sketch.</desc><defs></defs><g id=\"Page-1\" stroke=\"none\" stroke-width=\"1\" fill=\"none\" fill-rule=\"evenodd\" sketch:type=\"MSPage\"><g id=\"Artboard-8\" sketch:type=\"MSArtboardGroup\" transform=\"translate(-979.000000, -549.000000)\" fill=\"#AEAEAE\"><g id=\"Full-vector-path\" sketch:type=\"MSLayerGroup\" transform=\"translate(979.000000, 549.000000)\"><path d=\"M32.6783606,348.314972 L81.9095347,309.666147 L178.242802,387.91348 C213.042282,416.179589 268.948833,417.207556 304.79022,390.230569 L411.868735,309.63503 L461.989416,351.164228 L294.687237,477.088734 C265.004826,499.430003 217.635083,498.547293 188.834846,475.15411 L32.6783606,348.314972 Z M19.2354438,359.039602 C-6.62593762,382.117664 -5.82713003,417.651408 21.8567615,440.137832 L188.814783,575.750588 C217.626101,599.152772 265.020127,600.031261 294.666324,577.71725 L471.933566,444.292269 C501.091173,422.346008 502.419289,385.92569 475.267328,362.197265 L304.79022,490.511467 C268.948833,517.488455 213.042282,516.460488 178.242802,488.194379 L19.2354438,359.039602 Z M95.4596929,299.028626 L198.50357,218.134257 C227.693194,195.219007 274.527519,195.836287 303.106573,219.516436 L398.57111,298.61683 L294.687237,376.807835 C265.004826,399.149104 217.635083,398.266394 188.834846,374.873211 L95.4596929,299.028626 Z\" id=\"Base-layer\" sketch:type=\"MSShapeGroup\"></path><path d=\"M45.8421644,258.72646 L32.470588,247.865309 L198.50357,117.521482 C227.708304,94.5943704 274.527519,95.223512 303.106573,118.903661 L462.199296,250.725357 L448.401633,261.110541 L292.387775,131.839944 C269.89295,113.20109 231.857075,112.695864 208.877526,130.735908 L45.8421644,258.72646 Z M32.2967277,269.367817 L19.0412272,258.600949 C-6.62061571,281.684165 -5.74436993,317.105855 21.8366979,339.50876 L188.834846,475.15411 C217.635083,498.547293 265.004826,499.430003 294.687237,477.088734 L471.912654,343.695235 C501.008799,321.795234 502.426315,285.506694 475.470948,261.763118 L461.699258,272.12874 L463.151849,273.332334 C483.387128,290.098964 482.810002,314.466035 461.809671,330.272501 L284.584254,463.666001 C261.076006,481.360119 222.242635,480.64608 199.426891,462.113841 L32.4287426,326.468491 C12.2129453,310.048076 12.2096732,285.628236 32.2967277,269.367817 Z\" id=\"Middle-layer\" sketch:type=\"MSShapeGroup\"></path><path d=\"M303.106573,18.6227621 L473.870647,160.115153 C502.470886,183.812855 501.573077,221.089616 471.912654,243.414336 L294.687237,376.807835 C265.004826,399.149104 217.635083,398.266394 188.834846,374.873211 L21.8366979,239.227861 C-6.94564818,215.84921 -6.64628574,178.293025 22.5453033,155.376233 L198.50357,17.2405832 C227.708304,-5.6865285 274.527519,-5.05738689 303.106573,18.6227621 Z M292.387775,31.5590447 C269.89295,12.9201909 231.857075,12.4149656 208.877526,30.4550095 L32.9192595,168.590659 C12.2117199,184.847067 12.006219,209.599262 32.4287426,226.187592 L199.426891,361.832942 C222.242635,380.365181 261.076006,381.07922 284.584254,363.385102 L461.809671,229.991603 C482.810002,214.185136 483.387128,189.818065 463.151849,173.051435 L292.387775,31.5590447 Z\" id=\"Top-layer\" sketch:type=\"MSShapeGroup\"></path></g></g></g></svg>"
