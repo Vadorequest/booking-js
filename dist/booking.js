@@ -22351,7 +22351,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  avatar: '',
 	  autoload: true,
 	  includeStyles: true,
-	  showCredits: true,
+	  showCredits: false,
 	  goToFirstEvent: true,
 	  bookingGraph: 'instant',
 	  bookingFields: {
@@ -22407,7 +22407,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    header: {
 	      left: '',
 	      center: '',
-	      right: 'aujourd\'hui, précédent, suivant'
+	      right: 'today, prev, next'
 	    },
 	    views: {
 	      agenda: {
@@ -22424,14 +22424,16 @@ return /******/ (function(modules) { // webpackBootstrap
 	    showTimezoneHelper: true,
 	    timeDateFormat: '24h-dmy-mon',
 	    strings: {
-	      submitText: 'Réserver maintenant',
+	      submitText: 'Réserver',
 	      successMessageTitle: 'Merci !',
 	      timezoneHelperLoading: 'Chargement ...',
 	      timezoneHelperDifferent: 'Your timezone is %s hours %s of %s (calendar shown in your local time)',
 	      timezoneHelperSame: 'You are in the same timezone as %s'
 	    }
 	  },
-	  callbacks: {}
+	  callbacks: {
+	    submitBookingForm:        function(values)    { console.log('submitBookingForm', values); }
+	  }
 	
 	};
 	
